@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controllers ;
 
+use App\View ;
+
 class HomeController
 {
-	public function index(): string
+	public function index(): View
 	{
-		return 'Home page';
+		return View::make('home', ["name" => "Govind yadav"]);
 	}
 }

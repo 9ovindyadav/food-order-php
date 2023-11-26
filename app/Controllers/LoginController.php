@@ -4,14 +4,21 @@ declare(strict_types=1);
 
 namespace App\Controllers ;
 
+use App\View ;
+
 class LoginController
 {
-	public function index(): string
+	public function index(): View
 	{
-		return '<form action="/login/auth" method="post"><labe>email <input type="text" name="email"></label></form>';
+		return View::make('auth/login');
 	}
 
-	public function login(): string
+	public function login(): View
+	{	
+		return View::make('auth/signup');
+	}
+
+	public function signup(): string
 	{	
 		var_dump($_POST);
 		return 'Login Success';

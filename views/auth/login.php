@@ -1,0 +1,1 @@
+<form action="/login/auth" method="post"><labe>email <input type="text" name="email"></label></form>
