@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Classes ;
+namespace App\Controllers ;
 
-class Login
+class LoginController
 {
 	public function index(): string
 	{
