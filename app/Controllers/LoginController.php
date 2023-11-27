@@ -10,12 +10,12 @@ class LoginController
 {
 	public function index(): View
 	{
-		return View::make('auth/login');
+		return View::make('login');
 	}
 
-	public function login(): View
+	public function login(): string
 	{	
-		return View::make('auth/signup');
+		return 'Login success';
 	}
 
 	public function signup(): string

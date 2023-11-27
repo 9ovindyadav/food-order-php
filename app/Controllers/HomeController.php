@@ -10,6 +10,6 @@ class HomeController
 {
 	public function index(): View
 	{
-		return View::make('home', ["name" => "Govind yadav"]);
+		return View::make('home', $_GET);
 	}
 }

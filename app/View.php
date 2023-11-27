@@ -31,7 +31,7 @@ class View
 		}
 
 		ob_start();
-		
+
 		include $viewPath ;
 
 		return (string) ob_get_clean();
