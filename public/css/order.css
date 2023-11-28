@@ -3,7 +3,7 @@
 body {
   background-size:cover;
   background-repeat:no-repeat;
-  text-align: center;
+  
  font-family: 'Noto Sans', sans-serif;
  
 }
@@ -45,7 +45,6 @@ h1{
 
 section {
   min-height: 70vh;
-  border: 2px solid;
   transition:transform 0.2s ease-in-out;
 }
 

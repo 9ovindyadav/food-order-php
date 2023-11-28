@@ -19,16 +19,16 @@
 <body>
 	<?php require_once __DIR__.'/pages/header.php' ?>
 
-	<form action="/order/create" method="POST">
+	<form action="/order/create" method="POST" id="order-form">
 		<section>
 		  <div class="dinning-table-container">
 		  	<fieldset class="checkbox-group" id="dinning-table-list">
 		  		<legend class="checkbox-group-legend">Choose Table no</legend>
-		  		<?php $tablesList = [1,2,3,4,5,6,7,8] ?>
+		  		<?php $tablesList = [1,2,3,4,5,6] ?>
 		  		<?php foreach($tablesList as $table): ?>
 			  		<div class="checkbox">
 			  			<label class="checkbox-wrapper">
-			  				<input type="checkbox" name="table-<?= $table ?>" class="checkbox-input" />
+			  				<input type="checkbox" name="dinning-table" value="table-<?= $table ?>" class="checkbox-input" />
 			  				<span class="checkbox-tile">
 			  					<span class="checkbox-icon">
 			  					</span>
@@ -49,7 +49,7 @@
 					<?php foreach($menuList as $menu): ?>
 						<div class="checkbox">
 						  	<label class="checkbox-wrapper">
-						    <input type="checkbox" name="<?= $menu[0] ?>" class="checkbox-input" />
+						    <input type="checkbox" name="menu" value="<?= $menu[0] ?>" class="checkbox-input" />
 						    <span class="checkbox-tile">
 						      	<span class="checkbox-icon "> 
 						      	<img src="/images/dishes/<?= $menu[2] ?>" alt=""> 
@@ -67,7 +67,14 @@
 		</section>
 
 		<section>
-		 	<h1>Order Preview</h1>
+		 	<h1 class="text-center mb-5">Order Preview</h1>
+		 	<div class="ml-5" id="order-prev">
+		 		<h2 id="order-prev-table"></h2>
+		 		<hr>
+		 		<ol id="order-prev-menuItems">
+		 			
+		 		</ol>
+		 	</div>
 		</section>
 
 		<div class="row text-center">
