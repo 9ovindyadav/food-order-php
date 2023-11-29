@@ -10,11 +10,21 @@ use App\Controllers\OrderController ;
 
 require __DIR__.'/../vendor/autoload.php';	
 
-$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
-$dotenv->load();
+$filePath = __DIR__.'/../.env';
+
+if(file_exists($filePath))
+{
+    $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+    foreach($lines as $line)
+    {
+        list($name, $value) = explode('=', $line, 2);
+        $_ENV[$name] = $value ;
+    }
+}
 
 define('VIEW_PATH', __DIR__.'/');
-// session_start();
+session_start();
 
 $router = new Router() ;
 

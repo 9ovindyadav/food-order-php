@@ -6,19 +6,35 @@ namespace App\Controllers ;
 
 use App\App ;
 use App\View ;
+use App\Models\OrderModel ;
 
 class OrderController
 {
 	public function index(): View
-	{	
-		$conn = App::db();
-
+	{
 		return View::make('order');
 	}
 
 	public function createOrder(): string
 	{	
-		print_r($_POST) ;
-		return 'Order success';
+		$db = App::db();
+
+		$userId = 1 ;
+		$menuId = 1 ;
+
+		try {
+			$orderModel = new OrderModel();
+
+			$orderId = $orderModel->create($menuId, $userId);
+			$order = $orderModel->find($orderId);
+			
+			var_dump($order);
+
+			return 'Order created';
+
+		} catch (\Throwable $error) {
+			throw $error ;
+		}
+		
 	}
 }
