@@ -28,7 +28,7 @@
 		  		<?php foreach($tablesList as $table): ?>
 			  		<div class="checkbox">
 			  			<label class="checkbox-wrapper">
-			  				<input type="checkbox" name="dinning-table" value="table-<?= $table ?>" class="checkbox-input" />
+			  				<input type="checkbox" name="table" value="<?= $table ?>" class="checkbox-input" />
 			  				<span class="checkbox-tile">
 			  					<span class="checkbox-icon">
 			  					</span>
@@ -45,18 +45,18 @@
 			<div class="dinning-table-container">
 				<fieldset class="checkbox-group" id="menu-list">
 					<legend class="checkbox-group-legend">Menu list</legend>
-					<?php $menuList = [["Fried chicken",20,"fried-chicken.jpg"],["Pasta",40,"pasta.jpg"],["Chilli potato",50,"chilli-potato.jpg"]] ?>
+					<?php $menuList = $data ?>
 					<?php foreach($menuList as $menu): ?>
 						<div class="checkbox">
 						  	<label class="checkbox-wrapper">
-						    <input type="checkbox" name="menu" value="<?= $menu[0] ?>" class="checkbox-input" />
+						    <input type="checkbox" name="menu[]" value="<?= $menu['name'].' / '.$menu['price'].'/'.$menu['id'] ?>" class="checkbox-input" />
 						    <span class="checkbox-tile">
 						      	<span class="checkbox-icon "> 
-						      	<img src="/images/dishes/<?= $menu[2] ?>" alt=""> 
+						      	<img src="<?= $menu['img'] ?>"> 
 						      	</span>
 						      	<span class="checkbox-label">
-						        	<h4><?= $menu[0] ?></h4>
-						        	<h6><?= $menu[1] ?>/-</h6>
+						        	<h4><?= $menu['name'] ?></h4>
+						        	<h6><?= $menu['price'] ?>/-</h6>
 						      	</span>
 						    </span>
 						  </label>
@@ -71,9 +71,23 @@
 		 	<div class="ml-5" id="order-prev">
 		 		<h2 id="order-prev-table"></h2>
 		 		<hr>
-		 		<ol id="order-prev-menuItems">
-		 			
-		 		</ol>
+		 		<table>
+		 		    <thead>
+		 		        <tr>
+		 		            <th>Name</th>
+		 		            <th>Price</th>
+		 		        </tr>
+		 		    </thead>
+		 		    <tbody id="orderTableBody">
+	
+		 		    </tbody>
+		 		    <tfoot>
+		 		        <tr>
+		 		            <td><strong>Total</strong></td>
+		 		            <td id="totalAmount"><strong></strong></td>
+		 		        </tr>
+		 		    </tfoot>
+		 		</table>
 		 	</div>
 		</section>
 

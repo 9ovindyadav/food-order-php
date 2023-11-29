@@ -1,35 +1,45 @@
 $(document).ready(function () {
-    
-    $(document).ready(function () {
-        $("input[name='dinning-table']").on("change", function () {
-            updateOrderPreview();
-        });
 
-        $("input[name='menu']").on("change", function () {
-            updateOrderPreview();
-        });
 
-        function updateOrderPreview() {
-        
-            const table = $.map($("input[name='dinning-table']:checked"), function (element) {
-                return $(element).val();
-            });
-
-            const tableItems = $.map($("input[name='menu']:checked"), function (element) {
-                return $(element).val();
-            });
-
-            const ordered = $.map(tableItems,function (item) {
-                return `<h1><li>${item}</li></h1>`
-            });
-
-            const orderPreviewContent = table.concat(tableItems).join(', ');
-            $("#order-prev-table").html(table.join(" ").toUpperCase());
-            $("#order-prev-menuItems").html(ordered.join(" "));
-        }
+    $("input[name='dinning-table']").on("change", function () {
+        updateOrderPreview();
     });
 
+    $("input[name='menu[]']").on("change", function () {
+        updateOrderPreview();
+    });
 
+    function updateOrderPreview() {
+    
+        const table = $.map($("input[name='dinning-table']:checked"), function (element) {
+            return $(element).val();
+        });
+
+        const tableItems = $.map($("input[name='menu[]']:checked"), function (element) {
+            const menuString = $(element).val();
+            const parts = menuString.split('/');
+            var name = parts[0].trim();
+            var price = parseFloat(parts[1].trim());
+
+            const menuObject = { name: name, price: price };
+            return menuObject;
+        });
+
+        let totalAmount = 0;
+        const tableBody = $('#orderTableBody');
+
+        tableBody.empty();
+
+        tableItems.forEach(function (item) {
+            var row = '<tr><td>' + item.name + '</td><td>' + item.price + '</td></tr>';
+            tableBody.append(row);
+
+            totalAmount += item.price;
+        });
+
+        $('#totalAmount').html('&#x20B9;'+totalAmount.toFixed(2));
+    }
+    
     var baseColor = "rgb(230,230,230)";
     var activeColor = "rgb(237, 40, 70)";
 

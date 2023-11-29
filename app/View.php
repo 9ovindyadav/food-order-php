@@ -26,14 +26,12 @@ class View
 			throw new ViewNotFoundException();
 		}
 
-		foreach($this->params as $key => $value){
-			$$key = $value ;
-		}
+		$data = $this->params ;
 
 		ob_start();
 
 		include $viewPath ;
-
+		
 		return (string) ob_get_clean();
 	}
 
