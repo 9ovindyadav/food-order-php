@@ -49,7 +49,7 @@ class OrderController
 			
 			$db->commit();
 			echo '<pre>';
-			var_dump($order);
+			var_dump($order[0]['order_id']);
 			echo '</pre>';
 			return 'Order created';
 

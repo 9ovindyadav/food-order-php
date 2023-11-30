@@ -13,7 +13,7 @@ class UserModel extends Model
         $password = 'admin';
         $password = $this->hashPassword($password);
 
-        $statement = $this->db-prepare('INSERT INTO users( name, email, is_active, created_at) VALUES( ?, ?, ?, ?, NOW() )');
+        $statement = $this->db-prepare('INSERT INTO users( name, email, password, is_active, created_at) VALUES( ?, ?, ?, ?, NOW() )');
 
         $statement->execute([$name, $email, $password, $isActive]);
 

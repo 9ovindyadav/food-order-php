@@ -1,49 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <div class="header">
 
-        <?php require_once(__DIR__."/../pages/header.php") ?> 
-           
-        <div class="left-sidebar">
-        
-            <div class="scroll-sidebar">
-        
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <li class="nav-label">Home</li>
-                        <li> <a href="dashboard.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
-                        </li>
-                        <li class="nav-label">Log</li>
-                        <li> <a href="all_users.php">  <span><i class="fa fa-user f-s-20 "></i></span><span>Users</span></a></li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Restaurant</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="all_restaurant.php">All Restaurant</a></li>
-                                <li><a href="add_category.php">Add Category</a></li>
-                                <li><a href="add_restaurant.php">Add Restaurant</a></li>
-                                
-                            </ul>
-                        </li>
-                       <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cutlery" aria-hidden="true"></i><span class="hide-menu">Menu</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="all_menu.php">All Menues</a></li>
-                                <li><a href="add_menu.php">Add Menu</a></li>
-                              
-                                
-                            </ul>
-                        </li>
-                         <li> <a href="all_orders.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>Orders</span></a></li>
-                         
-                    </ul>
-                </nav>
-            
-            </div>
-        </div>  
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin</title>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="../css/bootstrap-4.6.2/css/bootstrap.css">
+	<script defer src="../css/bootstrap-4.6.2/js/bootstrap.bundle.js"></script>
+
+    <link rel="stylesheet" href="../css/admin.css">
+    <script defer src="../js/admin.js"></script>
+</head>
+
+
+<header>
+
+<div class="logosec">
+<img src="../images/icons/menu.svg"
+        class="icn menuicn"
+        id="menuicn"
+        alt="menu-icon">
+<div class="logo">SK Chinese</div>
+    
+</div>
+
+<div class="searchbar">
+    <input type="text"
+        placeholder="Search">
+    <div class="searchbtn">
+    <img src="../images/icons/search.svg"
+            class="icn srchicn"
+            alt="search-icon">
     </div>
-</body>
-</html>
+</div>
+
+<div class="message">
+    <div class="circle"></div>
+    <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png"
+        class="icn"
+        alt="">
+    <div class="dp">
+    <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
+            class="dpicn"
+            alt="dp">
+    </div>
+</div>
+
+</header>
+
+<div class="main-container">
+<div class="navcontainer">
+    <nav class="nav">
+        <div class="nav-upper-options">
+            
+                <a href="/admin/dashboard" class="nav-option option2">
+                    <img src="../images/icons/dashboard.svg"
+                        class="nav-img"
+                        alt="dashboard">
+                    <h3> Dashboard</h3>
+                </a>
+        
+
+            
+                <a href="/admin/orders" class="option2 nav-option">
+                    <img src="../images/icons/orders.svg"
+                        class="nav-img"
+                        alt="articles">
+                    <h3> Orders</h3>
+                </a>
+        
+
+            
+                <a href="/admin/users" class="nav-option option3">
+                    <img src="../images/icons/users.svg"
+                        class="nav-img"
+                        alt="report">
+                    <h3> Users</h3>
+                </a>
+
+            <a href="/admin/menu" class="nav-option option5">
+                    <img src="../images/icons/dishes.svg"
+                        class="nav-img"
+                        alt="blog">
+                    <h3> Menu </h3>
+            </a>
+
+            <a href="/user/profile" class="nav-option option6">
+                <img src="../images/icons/settings.svg"
+                    class="nav-img"
+                    alt="settings">
+                <h3> Profile</h3>
+            </a>
+
+            <a href="/user/logout" class="nav-option logout">
+                <img src="../images/icons/log-out.svg"
+                    class="nav-img"
+                    alt="logout">
+                <h3>Logout</h3>
+            </a>
+
+        </div>
+    </nav>
+</div>

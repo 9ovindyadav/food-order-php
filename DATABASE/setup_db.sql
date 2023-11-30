@@ -1,6 +1,4 @@
-Menus - id, name, price, created_at
-Users - id, name, email, created_at
-Orders - id, menu_id, user_id, created_at
+
 
 CREATE TABLE users (
             id INT AUTO_INCREMENT PRIMARY KEY,

@@ -30,23 +30,24 @@ class OrderModel extends Model
     {
         $statement = $this->db->prepare(
                                     'SELECT
-                                        orders.id AS order_id,
-                                        tables.id AS table_id,
-                                        users.name AS user_name,
-                                        orders.created_at AS order_created_at,
-                                        menus.id AS menu_id,
-                                        menus.name AS menu_name,
-                                        order_items.quantity
-                                    FROM orders
-                                    LEFT JOIN users ON users.id = orders.user_id 
-                                    LEFT JOIN tables ON tables.id = orders.table_id
-                                    LEFT JOIN order_items ON order_items.order_id = orders.id
-                                    LEFT JOIN menus ON menus.id = order_items.menu_id
-                                    WHERE orders.id = ?;
+                                           oi.order_id, 
+                                           oi.menu_id,
+                                           m.NAME,
+                                           oi.quantity,
+                                           o.table_id,
+                                           u.NAME AS user_name
+                                    FROM   order_items AS oi
+                                           INNER JOIN orders AS o
+                                                   ON oi.order_id = o.id
+                                           LEFT JOIN users AS u
+                                                  ON o.user_id = u.id
+                                           LEFT JOIN menus AS m
+                                                  ON oi.menu_id = m.id
+                                    WHERE  o.id = ? 
                                     ');
                         
         $statement->execute([$orderId]);
-        $order = $statement->fetch();
+        $order = $statement->fetchAll();
 
         return $order ?? [] ; 
     }

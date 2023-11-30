@@ -7,6 +7,7 @@ use App\Router ;
 use App\Config ;
 use App\Controllers\LoginController ;
 use App\Controllers\OrderController ;
+use App\Controllers\AdminController ;
 
 require __DIR__.'/../vendor/autoload.php';	
 
@@ -31,7 +32,10 @@ $router = new Router() ;
     $router->get('/login', [LoginController::class, 'index'])
             ->post('/login', [LoginController::class, 'login'])
             ->get('/', [OrderController::class, 'index'])
-            ->post('/order/create', [OrderController::class, 'createOrder']);
+            ->post('/order/create', [OrderController::class, 'createOrder'])
+            ->get('/admin/dashboard', [AdminController::class, 'index'])
+            ->get('/admin/users', [AdminController::class, 'manageUsers'])
+            ->get('/admin/orders', [AdminController::class, 'manageOrders']);
 
 
 (new App(
