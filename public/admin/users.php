@@ -1,11 +1,10 @@
-<?php $users = [['id'=> 1,'name'=>'Govind yadav','email' => 'govindsvyadav@gmail.com','role'=>'admin','updated_at'=>'02 nov 2023'],
-['id'=> 2,'name'=>'Karishma yadav','email' => 'karishmasvyadav@gmail.com','role'=>'cheff','updated_at'=>'02 nov 2023']];
+<?php 
+$users = $data;
+
 $roles = ['admin', 'user'];
-$countries = ['india','nepal'] ?>
+$countries = ['india','nepal'] 
+?>
 
-
-
-<body>
 
         <?php require_once('sidebar.php') ?>
 
@@ -51,7 +50,7 @@ $countries = ['india','nepal'] ?>
 	 					  	                Update
 	 					  	            </button>
 
-	 					  	            <form method="post" style="display: inline;">
+	 					  	            <form method="post" class="admin_delete_user" style="display: inline;">
 	 					  	                           <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
 	 					  	                           <button type="submit" name="delete_user" class="btn btn-danger">Delete</button>
 	 					  	                       </form>
@@ -68,7 +67,7 @@ $countries = ['india','nepal'] ?>
 	 					  	                        </div>
 	 					  	                        <div class="modal-body">
 	 					  	                            <!-- Update form with pre-filled values -->
-	 					  	                            <form method="post">
+	 					  	                            <form method="post" id="admin_update_user">
 	 					  	                                <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
 	 					  	                                <div class="form-group">
 	 					  	                                    <label for="full_name">Full Name</label>
@@ -121,18 +120,18 @@ $countries = ['india','nepal'] ?>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form method="POST">
+                                <form method="POST" id="admin_add_user">
                                     <div class="row">
-                                        <div class="col-6 form-group">
+                                        <div class="col-12 form-group">
                                             <label for="full-name">Full name</label>
                                             <input 
                                                 type="text" 
                                                 class="form-control" 
                                                 id="full-name"
-                                                name="full-name" 
+                                                name="full_name" 
                                                 placeholder="Enter your full name">
                                         </div>
-                                        <div class="col-6 form-group">
+                                        <div class="col-12 form-group">
                                             <label for="email">Email address</label>
                                             <input 
                                                 type="email" 
@@ -141,34 +140,18 @@ $countries = ['india','nepal'] ?>
                                                 id="email" 
                                                 placeholder="name@example.com">
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 form-group">
-                                            <label for="date-of-birth">Date of birth</label>
-                                            <input 
-                                                type="date" 
-                                                class="form-control" 
-                                                name="dob" 
-                                                onclick="this.showPicker()"
-                                                id="date-of-birth" 
-                                                placeholder="Enter your full name">
-                                        </div>
-                                        <div class="col-6 form-group">
-                                            <label for="country">Country</label>
-                                            <select 
-                                                class="form-control" 
-                                                name="country" 
-                                                id="country">
-                                            <option>Select your country...</option>
-                                            <?php 
-                                            $newArr = array_map(function($country){
-                                                return "<option>".$country."</option>";
-                                            }, $countries);
-
-                                            echo(implode("", $newArr));
-                                            ?>
-                                            </select>
-                                        </div>
+                                        <div class="col-12 form-group">
+                                        <label for="role">Role</label>
+	 					  	                <select 
+	 					  	                    class="form-control" 
+	 					  	                   	name="role"
+	 			                            	id="role">
+                                                <option value="">Choose role</option>		  	                         
+                                                <?php foreach($roles as $role): ?>
+                                                    <option value="<?= $role ?>"><?= $role ?></option>
+                                                <?php endforeach ?>    
+	 					  	                 </select>
+	                                    </div>
                                     </div>
                                     
                                     <div class="row my-3">
@@ -184,6 +167,3 @@ $countries = ['india','nepal'] ?>
         
 	</div>
 
-   
-</body>
-</html>

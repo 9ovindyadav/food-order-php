@@ -1,5 +1,19 @@
-$(document).ready(function () {
 
+    function getMenu(){
+        const menuObj = $.map($("input[name='menu[]']:checked"), function (element) {
+            const menuString = $(element).val();
+            const parts = menuString.split('/');
+
+            const name = parts[0].trim();
+            const price = parseFloat(parts[1].trim());
+            const id = parseInt(parts[2].trim());
+
+            const menuObject = { name: name, price: price, id: id };
+            return menuObject;
+        });
+
+        return menuObj ;
+    }
 
     $("input[name='dinning-table']").on("change", function () {
         updateOrderPreview();
@@ -11,26 +25,18 @@ $(document).ready(function () {
 
     function updateOrderPreview() {
     
-        const table = $.map($("input[name='dinning-table']:checked"), function (element) {
+        const table = $.map($("input[name='dinning-table[]']:checked"), function (element) {
             return $(element).val();
         });
 
-        const tableItems = $.map($("input[name='menu[]']:checked"), function (element) {
-            const menuString = $(element).val();
-            const parts = menuString.split('/');
-            var name = parts[0].trim();
-            var price = parseFloat(parts[1].trim());
-
-            const menuObject = { name: name, price: price };
-            return menuObject;
-        });
+        const menuObj = getMenu();
 
         let totalAmount = 0;
         const tableBody = $('#orderTableBody');
 
         tableBody.empty();
 
-        tableItems.forEach(function (item) {
+        menuObj.forEach(function (item) {
             var row = '<tr><td>' + item.name + '</td><td>' + item.price + '</td></tr>';
             tableBody.append(row);
 
@@ -82,7 +88,37 @@ $(document).ready(function () {
         sections.not(currentSection).hide();
     });
 
-});
+
+    $('#order-form').submit(function (e) {
+        e.preventDefault();
+
+        const table = $.map($("input[name='dinning-table[]']:checked"), function (element) {
+            return $(element).val();
+        });
+
+        const data = {
+            table : table,
+            menu : getMenu()
+        };
+      
+        $.ajax({
+          type: 'POST',
+          url: '/order/create',
+          data: data,
+        })
+          .done((data) => {
+            $(this).trigger('reset');
+            alert(data);
+          })
+          .fail((err) => {
+            
+            alert(err);
+          })
+          .always(() => {
+            console.log('always called');
+          });
+      });
+    
 
    
 

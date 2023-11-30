@@ -34,8 +34,9 @@ $router = new Router() ;
             ->get('/', [OrderController::class, 'index'])
             ->post('/order/create', [OrderController::class, 'createOrder'])
             ->get('/admin/dashboard', [AdminController::class, 'index'])
-            ->get('/admin/users', [AdminController::class, 'manageUsers'])
-            ->get('/admin/orders', [AdminController::class, 'manageOrders']);
+            ->get('/admin/users', [AdminController::class, 'viewUsers'])
+            ->post('/admin/users', [AdminController::class, 'manageUsers'])
+            ->get('/admin/orders', [AdminController::class, 'viewOrders']);
 
 
 (new App(

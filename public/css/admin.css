@@ -55,6 +55,7 @@ height: 2rem;
 }
 .menuicn {
 cursor: pointer;
+z-index:1;
 }
 
 .searchbar,
@@ -188,7 +189,7 @@ height: 2rem;
 display: flex;
 align-items: center;
 padding: 0 30px 0 20px;
-gap: 20px;
+gap: 20px;   
 transition: all 0.1s ease-in-out;
 }
 .nav-option h3{
@@ -269,9 +270,9 @@ letter-spacing: 3px;
 }
 
 .report-container {
-min-height: 300px;
+min-height: 100%;
 max-width: 1200px;
-margin: 70px auto 0px auto;
+margin: 0px auto 0px auto;
 background-color: #ffffff;
 border-radius: 30px;
 box-shadow: 3px 3px 10px rgb(188, 188, 188);
@@ -306,6 +307,7 @@ cursor: pointer;
 
 .report-body {
 max-width: 1160px;
+min-height: 60vh;
 overflow-x: auto;
 padding: 20px;
 }

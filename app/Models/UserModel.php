@@ -8,16 +8,20 @@ use App\Model ;
 
 class UserModel extends Model
 {
-    public function create(string $name, string $email, bool $isActive = true ): int
+    public function create(string $name, string $email, string $role = 'user', bool $isActive = true ): int
     {
-        $password = 'admin';
-        $password = $this->hashPassword($password);
+        if($name && $email){
+            $password = 'admin';
+            $password = $this->hashPassword($password);
 
-        $statement = $this->db-prepare('INSERT INTO users( name, email, password, is_active, created_at) VALUES( ?, ?, ?, ?, NOW() )');
+            $statement = $this->db->prepare('INSERT INTO users ( name, email, password, role, is_active, updated_at, created_at) VALUES( :name, :email, :password, :role,:isActive ,NOW(),NOW() )');
 
-        $statement->execute([$name, $email, $password, $isActive]);
+            $statement->execute([':name' => $name,':email' => $email, ':password' => $password, ':isActive' => $isActive, ':role' => $role]);
 
-        return (int) $this->db->lastInsertId() ;
+            return (int) $this->db->lastInsertId() ;
+        }
+
+        return 0 ;
     }
 
     public function find(int $userId): array
@@ -30,13 +34,16 @@ class UserModel extends Model
         return $user ?? [] ;
     }
 
-    public function update(string $name, string $email ,bool $isActive = true ): int
+    public function update(int $userId,string $name, string $email,string $role ,bool $isActive = true ): bool
     {
-        $statement = $this->db-prepare('UPDATE users SET name = ? , email = ? , is_active = ? , updated_at = NOW() ');
+        if($userId && $name && $email && $role){
+            $statement = $this->db->prepare('UPDATE users SET name = ? , email = ?, role = ? , is_active = ? , updated_at = NOW() WHERE id = ? ');
 
-        $statement->execute([$name, $email, $isActive]);
+            $statement->execute([$name, $email, $role, $isActive, $userId]);
 
-        return (int) $this->db->lastInsertId() ;
+            return true ;
+        }
+        return false ;
     }
 
     public function delete(int $userId): bool
@@ -50,7 +57,7 @@ class UserModel extends Model
 
     public function getAll(): array
     {
-        $statement = $this->db->prepare('SELECT id, name, email, is_active, updated_at FROM users');
+        $statement = $this->db->prepare('SELECT id, name, email, is_active ,role, updated_at,created_at FROM users');
 
         $statement->execute();
         $users = $statement->fetchAll();

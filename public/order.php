@@ -1,25 +1,7 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-
-	<script defer src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="/css/bootstrap-4.6.2/css/bootstrap.css">
-	<script defer src="/css/bootstrap-4.6.2/js/bootstrap.bundle.js"></script>	
-
-	<link rel="stylesheet" href="/css/order.css">
-	<script defer src="/js/order.js"></script>	
-
-	<link rel="stylesheet" href="/css/index.css">
-	<script defer src="/js/index.js"></script>	
-</head>
-<body>
 	<?php require_once __DIR__.'/pages/header.php' ?>
 
-	<form action="/order/create" method="POST" id="order-form">
+	<form method="POST" id="order-form">
 		<section>
 		  <div class="dinning-table-container">
 		  	<fieldset class="checkbox-group" id="dinning-table-list">
@@ -28,7 +10,7 @@
 		  		<?php foreach($tablesList as $table): ?>
 			  		<div class="checkbox">
 			  			<label class="checkbox-wrapper">
-			  				<input type="checkbox" name="table" value="<?= $table ?>" class="checkbox-input" />
+			  				<input type="checkbox" name="dinning-table[]" value="<?= $table ?>" class="checkbox-input" />
 			  				<span class="checkbox-tile">
 			  					<span class="checkbox-icon">
 			  					</span>
@@ -101,7 +83,3 @@
 			</div>
 		</div>
 	</form>
-	
-
-</body>
-</html>

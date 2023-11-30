@@ -27,15 +27,6 @@
     
 </div>
 
-<div class="searchbar">
-    <input type="text"
-        placeholder="Search">
-    <div class="searchbtn">
-    <img src="../images/icons/search.svg"
-            class="icn srchicn"
-            alt="search-icon">
-    </div>
-</div>
 
 <div class="message">
     <div class="circle"></div>

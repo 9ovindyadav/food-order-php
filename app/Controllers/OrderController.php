@@ -23,13 +23,12 @@ class OrderController
 	{	
 		$db = App::db();
 		$orderedMenuItems = $_POST['menu'];
-		$tableId = (int) $_POST['menu'];
-
+		$tableId = (int) $_POST['table'];
+		
 		$orderMenuIds = [] ;
 		foreach($orderedMenuItems as $item)
 		{
-			$id = explode('/', $item)[2];
-			$orderMenuIds[] = (int) $id ; 
+			$orderMenuIds[] = (int) $item['id'] ; 
 		}
 		$userId = 1 ;
 		
@@ -48,9 +47,8 @@ class OrderController
 			$order = $orderModel->find($orderId);
 			
 			$db->commit();
-			echo '<pre>';
+		
 			var_dump($order[0]['order_id']);
-			echo '</pre>';
 			return 'Order created';
 
 		} catch (\Throwable $error) {
