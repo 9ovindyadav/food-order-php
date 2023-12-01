@@ -8,11 +8,11 @@ use App\Model ;
 
 class OrderModel extends Model
 {
-    public function create(int $tableId, int $userId): int
+    public function create(int $userId): int
     {
-        $statement = $this->db->prepare('INSERT INTO orders(table_id, user_id, created_at) VALUES( ?, ?, NOW() )');
+        $statement = $this->db->prepare('INSERT INTO orders( user_id, created_at) VALUES( ?, NOW() )');
 
-        $statement->execute([$tableId, $userId]);
+        $statement->execute([ $userId]);
 
         return (int) $this->db->lastInsertId() ;
     }
@@ -34,7 +34,6 @@ class OrderModel extends Model
                                     m.NAME,
                                     m.price,
                                     oi.quantity,
-                                    o.table_id,
                                     u.NAME AS user_name,
                                     o.created_at
                              FROM   order_items AS oi
@@ -62,7 +61,6 @@ class OrderModel extends Model
                                     m.NAME,
                                     m.price,
                                     oi.quantity,
-                                    o.table_id,
                                     u.NAME AS user_name,
                                     o.created_at
                              FROM   order_items AS oi

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Exceptions\RouteNotFoundException ;
+use App\Exceptions\UnAuthorizedException ;
 
 class Router 
 {
@@ -86,82 +87,72 @@ class Router
 
 
 	private function authorize(string $route)
-{
-    // Example: Check if the route requires authentication
-    $isAuthenticationRequired = strpos($route, '/admin') === 0 || strpos($route, '/manager') === 0;
+	{
+		$isAuthenticationRequired = strpos($route, '/admin') === 0 || strpos($route, '/orders') === 0;
+		// var_dump($_SESSION);
+		if ( $isAuthenticationRequired && !isset($_SESSION['user_role'])) {
+			if($route !== '/login'){
+				header('location: /login');
+				exit();
+			}
+		}
 
-    if ($isAuthenticationRequired && !isset($_SESSION['user_id'])) {
-        header('Location: /login');
-        exit();
-    }
+		// Check user role and route permissions
+		if($isAuthenticationRequired && isset($_SESSION['user_role'])){
+			$allowedRoutes = $this->getAllowedRoutes($_SESSION['user_role']);
+		
+			if (!in_array($route, $allowedRoutes)) {
+				// header('Location: /401'); // Redirect unauthorized user to the default route
+				throw new UnAuthorizedException();
+				exit();
+			}
+		}
+	}
 
-    // Check user role and route permissions
-    $allowedRoutes = $this->getAllowedRoutes($_SESSION['user_role']);
+	private function getAllowedRoutes(string $userRole): array
+	{	
+		$commonRoutes = ['/','/logout'];
 
-    if (!in_array($route, $allowedRoutes)) {
-        header('Location: /'); // Redirect unauthorized user to the default route
-        exit();
-    }
-}
+		switch ($userRole) {
+			case 'admin':
+				return [$commonRoutes, ...$this->getAdminRoutes()];
+			case 'counter_staff':
+				return [$commonRoutes, ...$this->getCounterRoutes()];
+			case 'kitchen_staff':
+				return [$commonRoutes, ...$this->getKitchenRoutes()];
+			default:
+				return $commonRoutes;
+		}
+	}
 
-private function getAllowedRoutes(string $userRole): array
-{
-    switch ($userRole) {
-        case 'super_admin':
-            return $this->getAllRoutes();
-        case 'admin':
-            return $this->getAdminRoutes();
-        case 'manager':
-            return $this->getManagerRoutes();
-        case 'staff':
-            return $this->getStaffRoutes();
-        case 'customer':
-            return $this->getCustomerRoutes();
-        default:
-            return [];
-    }
-}
 
-private function getAllRoutes(): array
-{
-    // Return all routes for super admin
-    return $this->getAllRoutesFromRegisteredRoutes();
-}
+	private function getAdminRoutes(): array
+	{
+		return ['/admin/dashboard', 
+				'/admin/users', 
+				'/admin/orders',
+				'/admin/menus',
+				'/admin/profile'
+				];
+	}
 
-private function getAdminRoutes(): array
-{
-    // Return routes allowed for admin
-    return ['/admin/dashboard', '/admin/users', '/admin/orders'];
-}
+	private function getCounterRoutes(): array
+	{
+		return ['/counter/new_order',
+				'/counter/home',
+				'/counter/all_orders', 
+				'/counter/profile',
+				'/counter/pending_payments'
+				];
+	}
 
-private function getManagerRoutes(): array
-{
-    // Return routes allowed for manager
-    return ['/admin/dashboard', '/admin/users', '/admin/orders', '/manager/reports'];
-}
-
-private function getStaffRoutes(): array
-{
-    // Return routes allowed for staff
-    return ['/dashboard', '/orders'];
-}
-
-private function getCustomerRoutes(): array
-{
-    // Return routes allowed for customer
-    return ['/dashboard', '/orders', '/profile'];
-}
-
-private function getAllRoutesFromRegisteredRoutes(): array
-{
-    $allRoutes = [];
-
-    foreach ($this->routes as $methodRoutes) {
-        $allRoutes = array_merge($allRoutes, array_keys($methodRoutes));
-    }
-
-    return $allRoutes;
-}
-
+	private function getKitchenRoutes(): array
+	{
+		return ['/kitchen/pending_orders', 
+				'/kitchen/all_orders',
+				'/kitchen/profile',
+				'/kitchen/menus'
+				];
+	}
 
 }

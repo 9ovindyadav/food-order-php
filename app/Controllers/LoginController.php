@@ -27,6 +27,15 @@ class LoginController
 			try {
 				$isAuthenticated = $userModel->authenticate($email, $password);
 				if($isAuthenticated){
+					if($_SESSION['user_role'] === 'admin'){
+						header('location: /admin/dashboard');
+					}
+					if($_SESSION['user_role'] === 'counter_staff'){
+						header('location: /counter/home');
+					}
+					if($_SESSION['user_role'] === 'kitchen_staff'){
+						header('location: /kitchen/pending_orders');
+					}
 					return 'Logged In';
 				}	
 			} catch (\Exception $error) {
@@ -41,9 +50,11 @@ class LoginController
 
 	public function logout(): string
 	{	
-		$_SESSION = array();
 		session_destroy();
+		$_SESSION = array();
+
 		header('location: /login');
+
 		return 'Logged out';
 	}
 }

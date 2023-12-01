@@ -32,6 +32,18 @@ class AdminController
         return View::make('admin/users',$allUsers);
     }
 
+    public function viewMenus(): View
+    {   
+
+        return View::make('admin/menus');
+    }
+
+    public function viewProfile(): View
+    {   
+
+        return View::make('admin/profile');
+    }
+
     public function manageUsers(): string
     {
         $userModel = new UserModel();

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App ;
 
 use App\Exceptions\RouteNotFoundException ;
+use App\Exceptions\UnAuthorizedException ;
 
 
 class App
@@ -31,6 +32,10 @@ class App
             
             http_response_code(404);  
             echo View::make('error/404');
+        }catch(UnAuthorizedException){
+            
+            http_response_code(401);  
+            echo View::make('error/401');
         }
     }
 }

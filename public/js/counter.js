@@ -91,16 +91,13 @@
 
     $('#order-form').submit(function (e) {
         e.preventDefault();
-
-        const table = $.map($("input[name='dinning-table[]']:checked"), function (element) {
-            return $(element).val();
-        });
+        const userId = $("input[name='user_id']").val();
 
         const data = {
-            table : table,
+            user_id: userId,
             menu : getMenu()
         };
-      
+        
         $.ajax({
           type: 'POST',
           url: '/order/create',
@@ -108,9 +105,8 @@
         })
           .done((data) => {
             $(this).trigger('reset');
-            alert(data);
 
-            if (confirm('Do you want to place a new order?')) {
+            if (alert(data)) {
                 
                 location.reload(); 
             }
@@ -119,9 +115,6 @@
             
             alert(err);
           })
-          .always(() => {
-            console.log('always called');
-          });
       });
     
 

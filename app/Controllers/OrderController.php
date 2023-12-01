@@ -11,14 +11,6 @@ use App\Models\MenuModel ;
 
 class OrderController
 {
-	public function index(): View
-	{
-		$menuModel = new MenuModel();
-		$menu = $menuModel->getAll();
-		
-		return View::make('order',$menu);
-	}
-
 	public function getAllOrders(): array
 	{
 		$orderModal = new OrderModal();
@@ -30,21 +22,20 @@ class OrderController
 	{	
 		$db = App::db();
 		$orderedMenuItems = $_POST['menu'];
-		$tableId = (int) $_POST['table'];
+		$userId = (int) $_POST['user_id'];
 		
 		$orderMenuIds = [] ;
 		foreach($orderedMenuItems as $item)
 		{
 			$orderMenuIds[] = (int) $item['id'] ; 
 		}
-		$userId = 1 ;
 		
 		try {
 			$orderModel = new OrderModel();
 			
 			$db->beginTransaction();
 
-			$orderId = $orderModel->create($tableId, $userId);
+			$orderId = $orderModel->create($userId);
 
 			foreach($orderMenuIds as $menuId)
 			{

@@ -22,21 +22,13 @@ CREATE TABLE menus (
             img VARCHAR(200)
 );
 
-CREATE TABLE tables (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    capacity INT,
-    status bool    
-);
-
 
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    table_id INT,
-    status ENUM('taken', 'preparing', 'ready to serve', 'cancelled'),
+    status ENUM('taken', 'preparing', 'packaged', 'cancelled'),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (table_id) REFERENCES tables(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE order_items (
@@ -55,11 +47,6 @@ CREATE TABLE payments (
     status ENUM('payed','pending'),
     FOREIGN KEY (order_id) REFERENCES orders(id)
 );
-
-INSERT INTO tables (capacity, status) VALUES (4, false);
-INSERT INTO tables (capacity, status) VALUES (4, false);
-INSERT INTO tables (capacity, status) VALUES (6, false);
-INSERT INTO tables (capacity, status) VALUES (6, false);
 
 
 INSERT INTO `menus` (`id`, `name`, `price`, `created_at`, `img`) VALUES

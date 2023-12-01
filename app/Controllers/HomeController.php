@@ -10,6 +10,6 @@ class HomeController
 {
 	public function index(): View
 	{	
-		return View::make('home', $_GET);
+		return View::make('home');
 	}
 }
