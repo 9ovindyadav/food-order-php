@@ -9,9 +9,7 @@ use App\Models\UserModel ;
 
 class LoginController
 {	
-	public function __construct(private UserModel $userModel)
-	{
-	}
+	private UserModel $userModel;
 
 	public function index(): View
 	{
@@ -23,13 +21,29 @@ class LoginController
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
+		$userModel = new UserModel();
+		if($email && $password){
+			
+			try {
+				$isAuthenticated = $userModel->authenticate($email, $password);
+				if($isAuthenticated){
+					return 'Logged In';
+				}	
+			} catch (\Exception $error) {
+				return $error->getMessage();
+			}
+		}else{
+			return 'Please provide all the credentials.';
+		}
 		
 
 	}
 
-	public function signup(): string
+	public function logout(): string
 	{	
-		var_dump($_POST);
-		return 'Login Success';
+		$_SESSION = array();
+		session_destroy();
+		header('location: /login');
+		return 'Logged out';
 	}
 }

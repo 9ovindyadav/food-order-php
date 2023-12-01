@@ -6,6 +6,7 @@ namespace App\Controllers ;
 
 use App\View ;
 use App\Models\UserModel ;
+use App\Models\OrderModel ;
 
 class AdminController
 {
@@ -15,8 +16,11 @@ class AdminController
     }
 
     public function viewOrders(): View
-    {
-        return View::make('admin/orders');
+    {   
+        $orderModel = new OrderModel();
+        $orders = $orderModel->getAll();
+
+        return View::make('admin/orders', $orders);
     }
 
     public function viewUsers(): View

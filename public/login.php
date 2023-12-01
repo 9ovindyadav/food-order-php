@@ -17,7 +17,7 @@
 			<div class="col-md-8 mx-auto form-container">
 				<form action="/login" method="POST">
 					<h3 class="text-center">Login </h3>
-					<p class="text-center">Enter your details to login below.</p>
+					<p class="text-center">Enter your details to login in to the system.</p>
 					<div class="row">
 						
 						<div class="col-12 form-group">

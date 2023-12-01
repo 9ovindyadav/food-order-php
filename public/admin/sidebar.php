@@ -88,7 +88,7 @@
                 <h3> Profile</h3>
             </a>
 
-            <a href="/user/logout" class="nav-option logout">
+            <a href="/logout" class="nav-option logout">
                 <img src="../images/icons/log-out.svg"
                     class="nav-img"
                     alt="logout">

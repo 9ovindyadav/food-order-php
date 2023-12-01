@@ -318,6 +318,20 @@ display: grid;
 grid-template-columns: 8rem 10rem 20rem 8rem 10rem 15rem;
 align-items: center;
 }
+.report-topic-heading h3{
+    text-align: center;
+}
+.all-orders-table, .all-orders-table-heading {
+    grid-template-columns: 7rem 15rem 7rem 7rem 8rem 10rem 10rem;
+    align-items: center;
+}
+.item1 h3{
+    text-align: center;
+}
+.all-orders-table .order-menu{
+    text-align: start;
+    padding: 0 2rem ;
+}
 .t-op {
 font-size: 18px;
 letter-spacing: 0px;

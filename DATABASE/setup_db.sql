@@ -11,6 +11,9 @@ CREATE TABLE users (
             created_at DATETIME
 );
 
+INSERT INTO users (name, email, role, password, is_active, updated_at, created_at)
+VALUES ('Govind yadav','govindsvyadav@gmail.com','admin', '$2y$12$uVETOmnLx4WzPBJKTKyE7evjpjTq.jZapQoa/pjLiew1.qg7eDZ6C', true,NOW(),NOW());
+
 CREATE TABLE menus (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(30),

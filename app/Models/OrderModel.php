@@ -29,26 +29,54 @@ class OrderModel extends Model
     public function find(int $orderId): array
     {
         $statement = $this->db->prepare(
-                                    'SELECT
-                                           oi.order_id, 
-                                           oi.menu_id,
-                                           m.NAME,
-                                           oi.quantity,
-                                           o.table_id,
-                                           u.NAME AS user_name
-                                    FROM   order_items AS oi
-                                           INNER JOIN orders AS o
-                                                   ON oi.order_id = o.id
-                                           LEFT JOIN users AS u
-                                                  ON o.user_id = u.id
-                                           LEFT JOIN menus AS m
-                                                  ON oi.menu_id = m.id
-                                    WHERE  o.id = ? 
+                                    'SELECT oi.order_id,
+                                    oi.menu_id,
+                                    m.NAME,
+                                    m.price,
+                                    oi.quantity,
+                                    o.table_id,
+                                    u.NAME AS user_name,
+                                    o.created_at
+                             FROM   order_items AS oi
+                                    INNER JOIN orders AS o
+                                            ON oi.order_id = o.id
+                                    LEFT JOIN users AS u
+                                           ON o.user_id = u.id
+                                    LEFT JOIN menus AS m
+                                           ON oi.menu_id = m.id
+                             WHERE  o.id = ?;  
                                     ');
                         
         $statement->execute([$orderId]);
         $order = $statement->fetchAll();
 
         return $order ?? [] ; 
+    }
+
+
+    public function getAll(): array
+    {
+        $statement = $this->db->prepare(
+                                    'SELECT oi.order_id,
+                                    oi.menu_id,
+                                    m.NAME,
+                                    m.price,
+                                    oi.quantity,
+                                    o.table_id,
+                                    u.NAME AS user_name,
+                                    o.created_at
+                             FROM   order_items AS oi
+                                    INNER JOIN orders AS o
+                                            ON oi.order_id = o.id
+                                    LEFT JOIN users AS u
+                                           ON o.user_id = u.id
+                                    LEFT JOIN menus AS m
+                                           ON oi.menu_id = m.id 
+                                    ');
+                        
+        $statement->execute();
+        $orders = $statement->fetchAll();
+
+        return $orders ?? [] ; 
     }
 }

@@ -27,10 +27,20 @@ if(file_exists($filePath))
 define('VIEW_PATH', __DIR__.'/');
 session_start();
 
+$authMuddleware = function () {
+    $currentRoute = $_SERVER['REQUEST_URI'];
+    if ($currentRoute !== '/login' && !isset($_SESSION['user_id'])) {
+        header('location: /login');
+        exit();
+    }
+};
+
 $router = new Router() ;
 
     $router->get('/login', [LoginController::class, 'index'])
             ->post('/login', [LoginController::class, 'login'])
+            ->get('/logout', [LoginController::class, 'logout'])
+            ->middleware($authMuddleware)
             ->get('/', [OrderController::class, 'index'])
             ->post('/order/create', [OrderController::class, 'createOrder'])
             ->get('/admin/dashboard', [AdminController::class, 'index'])
@@ -45,3 +55,5 @@ $router = new Router() ;
     new Config($_ENV),
 ))
 ->run();
+
+var_dump($_SESSION);

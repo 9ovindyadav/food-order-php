@@ -109,7 +109,12 @@
           .done((data) => {
             $(this).trigger('reset');
             alert(data);
-          })
+
+            if (confirm('Do you want to place a new order?')) {
+                
+                location.reload(); 
+            }
+            })
           .fail((err) => {
             
             alert(err);

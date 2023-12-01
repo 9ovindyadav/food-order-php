@@ -19,6 +19,13 @@ class OrderController
 		return View::make('order',$menu);
 	}
 
+	public function getAllOrders(): array
+	{
+		$orderModal = new OrderModal();
+		$orders = $orderModal->getAllOrders();
+		return $orders ?? [] ;
+	}
+
 	public function createOrder(): string
 	{	
 		$db = App::db();

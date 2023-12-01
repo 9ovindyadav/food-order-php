@@ -24,14 +24,30 @@ class UserModel extends Model
         return 0 ;
     }
 
-    public function find(int $userId): array
+    public function findById(int $userId): array
     {
-        $statement = $this->db->prepare('SELECT name, email, is_active FROM users WHERE id = ?');
+        $statement = $this->db->prepare('SELECT id,name, email, role, is_active, password FROM users WHERE id = ?');
 
         $statement->execute([$userId]);
         $user = $statement->fetch();
+        if(!$user){
+            throw new \Exception('User not found');
+        }
 
-        return $user ?? [] ;
+        return $user ;
+    }
+
+    public function findByEmail(string $email): array
+    {
+        $statement = $this->db->prepare('SELECT id,name, email, role, is_active, password FROM users WHERE email = ?');
+
+        $statement->execute([$email]);
+        $user = $statement->fetch();
+        if(!$user){
+            throw new \Exception('User not found');
+        }
+
+        return $user ;
     }
 
     public function update(int $userId,string $name, string $email,string $role ,bool $isActive = true ): bool
@@ -83,21 +99,22 @@ class UserModel extends Model
 
     public function authenticate(string $email, string $password): bool
     {
-        $user = $this->getUSerByEmail($email);
+        $user = $this->findByEmail($email);
 
+        if(!password_verify($password, $user['password'])){
+            throw new \Exception('Wrong Password');
+        }
         if($user && password_verify($password, $user['password']))
         {
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['authenticated'] = true ;
-            
-            return true;
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['authenticated'] = true ;            
+            return true ;
         }
-        
-        return false;
     }
 
     public function isAuthenticated():bool
     {
-        return isset($_SESSION['authenticate']) && $_SESSION['authenticate'] === true ;
+        return isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true ;
     }
 }
