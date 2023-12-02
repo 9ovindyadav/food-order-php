@@ -10,5 +10,5 @@
 	<script defer src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script defer src="../css/bootstrap-4.6.2/js/bootstrap.bundle.js"></script>
 	<script defer src="../js/admin.js"></script>	
-    <script defer src="../js/order.js"></script>	
+    <script defer src="../js/kitchen.js"></script>	
 	<script defer src="../js/index.js"></script>	

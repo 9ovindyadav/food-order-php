@@ -105,7 +105,7 @@
         })
           .done((data) => {
             $(this).trigger('reset');
-
+            console.log(data);
             if (alert(data)) {
                 
                 location.reload(); 

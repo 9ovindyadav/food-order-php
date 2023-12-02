@@ -151,7 +151,8 @@ class Router
 		return ['/kitchen/pending_orders', 
 				'/kitchen/all_orders',
 				'/kitchen/profile',
-				'/kitchen/menus'
+				'/kitchen/menus',
+				'/order/update/status'
 				];
 	}
 

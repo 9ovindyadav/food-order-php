@@ -1,8 +1,8 @@
 <?php 
 $users = $data;
 
-$roles = ['admin', 'counter_staff','kitchen_staff'];
-$countries = ['india','nepal','bhutan','bangladesh','shree lanka']; 
+require_once(__DIR__.'/../../meta_data.php');
+ 
 ?>
 
 <!DOCTYPE html>

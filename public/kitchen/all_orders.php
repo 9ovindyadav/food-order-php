@@ -1,5 +1,7 @@
 
 <?php
+require_once(__DIR__.'/../../meta_data.php');
+
 $unOrganizedorders = $data ;
 
 $orders = [];
@@ -10,17 +12,20 @@ foreach ($unOrganizedorders as $order) {
     if (!isset($orders[$orderId])) {
         $orders[$orderId] = [
             'order_id' => $orderId,
-            'user_name' => $order['user_name'],
+            'created_by' => $order['created_by'],
             'created_at' => $order['created_at'],
+            'amount' => $order['amount'],
+            'payment_status' => $order['payment_status'],
+            'order_status' => $order['order_status'],
             'items' => [],
         ];
     }
 
     $orders[$orderId]['items'][] = [
         'menu_id' => $order['menu_id'],
-        'name' => $order['NAME'],
-        'price' => $order['price'],
-        'quantity' => $order['quantity']
+        'name' => $order['menu_name'],
+        'price' => $order['menu_price'],
+        'quantity' => $order['menu_qty']
     ];
 }
 $orders = array_reverse($orders);
@@ -71,22 +76,23 @@ $orders = array_reverse($orders);
                                     <?php endforeach ?>
                                     </ol>
                                 </h3>
+                                <h3 class="t-op-nextlvl"><?= $order['amount'] ?></h3>
                                 <h3 class="t-op-nextlvl">
-                                    <?php
-                                    $items = $order['items'];
-                                    $menuPrices = array_map(function ($item) {
-                                        return $item['price'] ;
-                                    },$items);
-
-                                    $amount = array_sum($menuPrices) ;
-
-                                    echo $amount ;
-
-                                    ?>
+                                    <form method="post" class="order_status_form" data-order-id="<?= $order['order_id'] ?>" >
+                                        
+                                        <div class="form-group">
+                                            <select class="form-control order_status" name="order_status" id="order_status_<?= $order['order_id'] ?>">
+                                                <?php foreach ($orderStatus as $status): ?>
+                                                    <option value="<?= $status ?>" <?= ($status == $order['order_status']) ? 'selected' : '' ?>>
+                                                        <?= $status ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </form>
                                 </h3>
-                                <h3 class="t-op-nextlvl">Taken</h3>
-                                <h3 class="t-op-nextlvl">Payed</h3>
-                                <h3 class="t-op-nextlvl"><?= $order['user_name'] ?></h3>
+                                <h3 class="t-op-nextlvl"><?= $order['payment_status'] ?></h3>
+                                <h3 class="t-op-nextlvl"><?= $order['created_by'] ?></h3>
                                 <h3 class="t-op-nextlvl"><?= $order['created_at'] ?></h3>
                     </div>
                     <?php endforeach ?>

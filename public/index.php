@@ -65,7 +65,7 @@ $router = new Router() ;
             ->post('/admin/users', [AdminController::class, 'manageUsers'])
 
             ->post('/order/create', [OrderController::class, 'createOrder'])
-            ->post('/order/update', [OrderController::class, ''])
+            ->post('/order/update/status', [OrderController::class, 'updateOrderStatus'])
             ->get('/counter/order/view', [OrderController::class, 'getAllOrders'])
             ;
 

@@ -26,7 +26,7 @@ CREATE TABLE menus (
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    status ENUM('taken', 'preparing', 'packaged', 'cancelled'),
+    status VARCHAR(20),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -43,8 +43,8 @@ CREATE TABLE order_items (
 CREATE TABLE payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT,
-    amount INT,
-    status ENUM('payed','pending'),
+    amount DECIMAL(10, 2),
+    status VARCHAR(10),
     FOREIGN KEY (order_id) REFERENCES orders(id)
 );
 
