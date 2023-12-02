@@ -26,7 +26,7 @@ class UserModel extends Model
 
     public function findById(int $userId): array
     {
-        $statement = $this->db->prepare('SELECT id,name, email, role, is_active, password FROM users WHERE id = ?');
+        $statement = $this->db->prepare('SELECT name, email, role, is_active, updated_at FROM users WHERE id = ?');
 
         $statement->execute([$userId]);
         $user = $statement->fetch();

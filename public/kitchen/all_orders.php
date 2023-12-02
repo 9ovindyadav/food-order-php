@@ -49,58 +49,104 @@ $orders = array_reverse($orders);
         
             </div>
 
-            <div class="report-body">
-                <div class="report-topic-heading all-orders-table-heading">
-                    <h3 class="t-op">Order Id</h3>
-                    <h3 class="t-op">Order Items</h3>
-                    <h3 class="t-op">Amount</h3>
-                    <h3 class="t-op">Status</h3>
-                    <h3 class="t-op">Payment</h3>
-                    <h3 class="t-op">Created By</h3>
-                    <h3 class="t-op">Created At</h3>
-                </div>
-                <div class="items">
-                    <?php foreach($orders as $order): ?>
-                    <div class="item1 all-orders-table">
-                                <h3 class="t-op-nextlvl"><?= $order['order_id'] ?></h3>
-                                <h3 class="t-op-nextlvl order-menu">
-                                    <?php
-                                    $items = $order['items'];
-                                    $menuNames = array_map(function ($item) {
-                                        return $item['name'].' - '.$item['quantity'].' pcs' ;
-                                    },$items);
-                                    ?>
-                                    <ol>
-                                    <?php foreach($menuNames as $menu): ?>
-                                        <li><?= $menu ?></li>
-                                    <?php endforeach ?>
-                                    </ol>
-                                </h3>
-                                <h3 class="t-op-nextlvl"><?= $order['amount'] ?></h3>
-                                <h3 class="t-op-nextlvl">
-                                    <form method="post" class="order_status_form" data-order-id="<?= $order['order_id'] ?>" >
-                                        
-                                        <div class="form-group">
-                                            <select class="form-control order_status" name="order_status" id="order_status_<?= $order['order_id'] ?>">
-                                                <?php foreach ($orderStatus as $status): ?>
-                                                    <option value="<?= $status ?>" <?= ($status == $order['order_status']) ? 'selected' : '' ?>>
+            <div class="table-responsive text-nowrap">
+            <table class="table table-striped align-middle mb-0 bg-white">
+                <thead class="bg-light text-center">
+                    <tr>
+                    <th>Order Id</th>
+                    <th>Order Menu</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                    <th>Created By</th>
+                    <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach($orders as $order): ?>
+                    <tr>
+                    <td class="text-center"><?= $order['order_id'] ?></td>
+                    <td>
+                        <?php
+                                $items = $order['items'];
+                                $menuNames = array_map(function ($item) {
+                                    return $item['name'].' - '.$item['quantity'].' pcs' ;
+                                },$items);
+                                ?>
+                                
+                                <?php foreach($menuNames as $menu): ?>
+                                    <p><?= $menu ?></p>
+                                <?php endforeach ?>
+                                             
+                    </td>
+                    <td class="text-center">
+                    <?= $order['amount'] ?>
+                    </td>
+                    <td class="text-center">
+                        <?php
+                            $orderStatus = $order['order_status'];
+
+                            // Define CSS classes for each status
+                            $statusClasses = [
+                                'cancelled' => 'badge-danger',
+                                'taken' => 'badge-warning',
+                                'prepairing' => 'badge-primary',
+                                'packed' => 'badge-success',
+                            ];
+
+                            // Check if the status exists in the array, default to 'badge-secondary' if not found
+                            $statusClass = isset($statusClasses[$orderStatus]) ? $statusClasses[$orderStatus] : 'badge-secondary';
+                        ?>
+                        <form method="post" class="order_status_form" data-order-id="<?= $order['order_id'] ?>" >
+                                                            
+                                                            <div class="form-group">
+                                                                <select class="form-control order_status badge rounded-pill d-inline <?= $statusClass ?>" name="order_status" id="order_status_<?= $order['order_id'] ?>">
+                                                                    <?php foreach ($orderStatuses as $status): ?>
+                                                                        <option value="<?= $status ?>" <?= ($status == $order['order_status']) ? 'selected' : '' ?>>
+                                                                            <?= $status ?>
+                                                                        </option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+                                                        </form>
+                    </td>
+
+                    <td class="text-center">
+                    <?php
+                            $paymentStatus = $order['payment_status'];
+
+                            // Define CSS classes for each status
+                            $paymentStatusClasses = [
+                                'unpaid' => 'badge-warning',
+                                'paid' => 'badge-success',
+                            ];
+
+                            // Check if the status exists in the array, default to 'badge-secondary' if not found
+                            $paymentStatusClass = isset($paymentStatusClasses[$paymentStatus]) ? $paymentStatusClasses[$paymentStatus] : 'badge-secondary';
+                        ?>
+                    <form method="post" class="payment_status_form" data-order-id="<?= $order['order_id'] ?>" >
+                    <div class="form-group">
+                    <select class="form-control payment_status badge rounded-pill d-inline <?= $paymentStatusClass ?>" name="payment_status" id="payment_status_<?= $order['order_id'] ?>">
+                                                <?php foreach ($paymentStatuses as $status): ?>
+                                                    <option value="<?= $status ?>" <?= ($status == $order['payment_status']) ? 'selected' : '' ?>>
                                                         <?= $status ?>
                                                     </option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
                                     </form>
-                                </h3>
-                                <h3 class="t-op-nextlvl"><?= $order['payment_status'] ?></h3>
-                                <h3 class="t-op-nextlvl"><?= $order['created_by'] ?></h3>
-                                <h3 class="t-op-nextlvl"><?= $order['created_at'] ?></h3>
-                    </div>
+                    </td>
+                    <td class="text-center"><?= $order['created_by'] ?></td>
+                    <td class="text-center">
+                    <?= $order['created_at'] ?>
+                    </td>
+                    </tr>
                     <?php endforeach ?>
+                </tbody>
+                </table>
                 </div>
-                
-                </div>
-            </div>
-        </div>
+
+ </div>
     </div>
 </div>
 

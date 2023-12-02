@@ -5,3 +5,5 @@ menuicn.addEventListener("click", () => {
 	nav.classList.toggle("navclose");
   console.log('Clock')
 })
+
+

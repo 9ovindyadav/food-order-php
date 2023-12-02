@@ -10,4 +10,6 @@
 	<script defer src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script defer src="../css/bootstrap-4.6.2/js/bootstrap.bundle.js"></script>
 	<script defer src="../js/index.js"></script>	
-    <script defer src="../js/counter.js"></script>	
+    <script defer src="../js/orders.js"></script>
+	<script defer src="../js/users.js"></script>
+	<script defer src="../js/menus.js"></script>	

@@ -1,20 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@400;700&display=swap');
 
-body {
-  background-size:cover;
-  background-repeat:no-repeat;
-  
- font-family: 'Noto Sans', sans-serif;
- 
-}
-
-h1{
-  font-weight:400;
-  padding-top:0;
-  margin-top:0;
-  font-family: 'Roboto Slab', serif;
-}
-
 #svg_form_time {
   height: 15px;
   max-width: 80%;
@@ -44,7 +29,7 @@ h1{
 }
 
 section {
-  min-height: 70vh;
+  margin-top: 1rem;
   transition:transform 0.2s ease-in-out;
 }
 

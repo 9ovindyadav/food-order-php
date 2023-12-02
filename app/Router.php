@@ -49,62 +49,69 @@ class Router
 
 	public function resolve(string $requestUri, string $requestMethod)
 	{	
+		try{
+			$route = explode('?', $requestUri)[0];
 
-		$route = explode('?', $requestUri)[0];
+			$action = $this->routes[$requestMethod][$route] ?? null ;
 
-		$action = $this->routes[$requestMethod][$route] ?? null ;
+			if( ! $action){
 
-		if( ! $action){
+				throw new RouteNotFoundException();
+			}
 
-			throw new RouteNotFoundException();
-		}
+			$this->runMiddlewareStack();
 
-		$this->runMiddlewareStack();
+			$this->authorize($route);
 
-		$this->authorize($route);
+			if( is_callable($action)){
+				return call_user_func($action) ;
+			}
 
-		if( is_callable($action)){
-			return call_user_func($action) ;
-		}
+			if( is_array($action)){
 
-		if( is_array($action)){
-
-			[$class, $method] = $action;
-			
-			if(class_exists($class)){
-			
-				$class = new $class() ;
-			
-				if(method_exists($class, $method)){
-					
-					return call_user_func_array([$class, $method],[]);
+				[$class, $method] = $action;
+				
+				if(class_exists($class)){
+				
+					$class = new $class() ;
+				
+					if(method_exists($class, $method)){
+						
+						return call_user_func_array([$class, $method],[]);
+					}
 				}
 			}
-		}
 
-		throw new RouteNotFoundException();
+			throw new RouteNotFoundException();
+
+		}catch(UnAuthorizedException $error){
+			return $error->getMessage();
+		}
 	}
 
 
 	private function authorize(string $route)
 	{
-		$isAuthenticationRequired = strpos($route, '/admin') === 0 || strpos($route, '/orders') === 0;
-		// var_dump($_SESSION);
-		if ( $isAuthenticationRequired && !isset($_SESSION['user_role'])) {
+
+		if ( !isset($_SESSION['user_id'])) {
 			if($route !== '/login'){
 				header('location: /login');
 				exit();
 			}
 		}
 
-		// Check user role and route permissions
-		if($isAuthenticationRequired && isset($_SESSION['user_role'])){
+		if(isset($_SESSION['user_role'])){
 			$allowedRoutes = $this->getAllowedRoutes($_SESSION['user_role']);
-		
-			if (!in_array($route, $allowedRoutes)) {
-				// header('Location: /401'); // Redirect unauthorized user to the default route
-				throw new UnAuthorizedException();
-				exit();
+			$routeFound = false;
+			foreach ($allowedRoutes as $allowedRoute) {
+				if (strtolower($route) === strtolower($allowedRoute)) {
+					$routeFound = true;
+					break;
+				}
+			}
+
+			if (!$routeFound) {			
+				throw new UnAuthorizedException('Not Authorized to access this path');
 			}
 		}
 	}
@@ -115,11 +122,11 @@ class Router
 
 		switch ($userRole) {
 			case 'admin':
-				return [$commonRoutes, ...$this->getAdminRoutes()];
+				return array_merge($commonRoutes, $this->getAdminRoutes());
 			case 'counter_staff':
-				return [$commonRoutes, ...$this->getCounterRoutes()];
+				return array_merge($commonRoutes, $this->getCounterRoutes());
 			case 'kitchen_staff':
-				return [$commonRoutes, ...$this->getKitchenRoutes()];
+				return array_merge($commonRoutes, $this->getKitchenRoutes());
 			default:
 				return $commonRoutes;
 		}
@@ -142,7 +149,9 @@ class Router
 				'/counter/home',
 				'/counter/all_orders', 
 				'/counter/profile',
-				'/counter/pending_payments'
+				'/counter/pending_payments',
+				'/payment/update/status',
+				'/order/create'
 				];
 	}
 

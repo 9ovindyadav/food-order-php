@@ -12,7 +12,12 @@ class AdminController
 {
     public function index(): View
     {
-        return View::make('admin/dashboard');
+        $orderModel = new OrderModel();
+
+        $orders = $orderModel->getAll();
+        $dashboardData = $orderModel->adminDashboardData();
+        $data = [$dashboardData, $orders];
+        return View::make('admin/dashboard', $data);
     }
 
     public function viewOrders(): View
@@ -40,8 +45,11 @@ class AdminController
 
     public function viewProfile(): View
     {   
-
-        return View::make('admin/profile');
+        $userId = (int) $_GET['user_id'];
+		
+		$userModel = new UserModel();
+		$user = $userModel->findById($userId);
+        return View::make('admin/profile', $user);
     }
 
     public function manageUsers(): string

@@ -64,7 +64,7 @@
                     <h3> Menu </h3>
             </a>
 
-            <a href="/admin/profile" class="nav-option option6">
+            <a href="/admin/profile?user_id=<?= $_SESSION['user_id'] ?>" class="nav-option option6">
                 <img src="../images/icons/settings.svg"
                     class="nav-img"
                     alt="settings">

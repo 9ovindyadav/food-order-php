@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controllers ;
 
+use App\Models\UserModel;
 use App\View ;
 use App\Models\MenuModel ;
 use App\Models\OrderModel ;
+
 
 class CounterController
 {
@@ -33,12 +35,20 @@ class CounterController
 
     public function viewProfile(): View
 	{
-		return View::make('counter/profile');
+		$userId = (int) $_GET['user_id'];
+		
+		$userModel = new UserModel();
+		$user = $userModel->findById($userId);
+		
+		return View::make('counter/profile', $user);
 	}
 
     public function viewPendingPaymentOrders(): View
-    {
-        return View::make('counter/pending_payments');
+    {	
+		$orderModel = new OrderModel();
+		$unpaidOrders = $orderModel->getAllUnPaidOrders();
+
+        return View::make('counter/pending_payments', $unpaidOrders);
     }
     
 }

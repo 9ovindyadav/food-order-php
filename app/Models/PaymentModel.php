@@ -19,4 +19,13 @@ class PaymentModel extends Model
 
         return (int) $this->db->lastInsertId() ;
     }
+
+    public function statusUpdate(int $orderId, string $status): bool
+    {   
+        $statement = $this->db->prepare('UPDATE payments SET status = ? WHERE order_id = ?');
+
+        $statement->execute([ $status, $orderId]);
+
+        return true ;
+    }
 }

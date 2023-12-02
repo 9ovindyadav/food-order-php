@@ -9,13 +9,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8f8f9;
 }
 .checkbox-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 90%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   max-width: 600px;
@@ -107,16 +106,18 @@
 .checkbox-icon {
   transition: 0.375s ease;
   color: #494949;
-  padding: 1rem;
+  
 }
 
 .checkbox-tile img {
-  width: auto ;
-  height: 4rem;
+  width: 10rem ;
+  height: 6rem;
+  margin-bottom: 5px;
   object-fit: cover;
   border-radius: 10px;
 }
 .checkbox-label {
+  font-size: 0.5rem;
   color: #707070;
   transition: 0.375s ease;
   text-align: center;

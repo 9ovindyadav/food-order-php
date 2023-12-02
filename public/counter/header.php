@@ -59,7 +59,7 @@
                     <h3> All Orders</h3>
                 </a>
         
-            <a href="/counter/profile" class="nav-option option6">
+            <a href="/counter/profile?user_id=<?= $_SESSION['user_id'] ?>" class="nav-option option6">
                 <img src="../images/icons/settings.svg"
                     class="nav-img"
                     alt="settings">

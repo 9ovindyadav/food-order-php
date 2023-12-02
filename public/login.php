@@ -9,13 +9,13 @@
 	<script defer src="/css/bootstrap-4.6.2/js/bootstrap.bundle.js"></script>	
 
 	<link rel="stylesheet" href="/css/index.css">
-	<script defer src="/js/index.js"></script>	
+	<script defer src="/js/users.js"></script>	
 </head>
 <body>
 	<div class="container login-page">
 		<div class="row">
 			<div class="col-md-8 mx-auto form-container">
-				<form action="/login" method="POST">
+				<form action="/login" method="POST" id="login_form">
 					<h3 class="text-center">Login </h3>
 					<p class="text-center">Enter your details to login in to the system.</p>
 					<div class="row">

@@ -11,6 +11,7 @@ use App\Controllers\OrderController ;
 use App\Controllers\AdminController ;
 use App\Controllers\CounterController ;
 use App\Controllers\KitchenController ;
+use App\Controllers\PaymentController ;
 
 require __DIR__.'/../vendor/autoload.php';	
 
@@ -66,6 +67,8 @@ $router = new Router() ;
 
             ->post('/order/create', [OrderController::class, 'createOrder'])
             ->post('/order/update/status', [OrderController::class, 'updateOrderStatus'])
+
+            ->post('/payment/update/status', [PaymentController::class, 'updatePaymentStatus'])
             ->get('/counter/order/view', [OrderController::class, 'getAllOrders'])
             ;
 

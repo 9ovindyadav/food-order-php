@@ -173,6 +173,7 @@ padding: 30px 0 20px 10px;
 height: calc(100vh - 70px);
 width: 250px;
 position: relative;
+z-index: 2;
 overflow-y: scroll;
 overflow-x: hidden;
 transition: all 0.5s ease-in-out;
@@ -251,9 +252,16 @@ background-color: var(--one-use-color);
 .box:nth-child(4) {
 background-color: var(--two-use-color);
 }
+.box:nth-child(5) {
+    background-color: var(--two-use-color);
+}
+.box:nth-child(6) {
+    background-color: var(--two-use-color);
+}
 
 .box img {
 height: 50px;
+filter: invert(100);
 }
 .box .text {
 color: white;
@@ -309,7 +317,6 @@ cursor: pointer;
 max-width: 1160px;
 min-height: 60vh;
 overflow-x: auto;
-padding: 20px;
 }
 .report-topic-heading,
 .item1 {
@@ -522,4 +529,5 @@ border-radius: 4px;
         width: 180px;
     }
     }
+  
     

@@ -5,8 +5,11 @@
 
 	<link rel="stylesheet" href="../css/bootstrap-4.6.2/css/bootstrap.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script defer src="../css/bootstrap-4.6.2/js/bootstrap.bundle.js"></script>
-    <script defer src="../js/index.js"></script>
-    <script defer src="../js/admin.js"></script>
+    <script defer src="../js/index.js"></script>	
+    <script defer src="../js/orders.js"></script>
+	<script defer src="../js/users.js"></script>
+	<script defer src="../js/menus.js"></script>

@@ -7,6 +7,7 @@ namespace App\Controllers ;
 use App\App ;
 use App\Models\OrderModel ;
 use App\Models\PaymentModel ;
+use App\Exceptions\UnAuthorizedException ;
 
 class OrderController
 {
@@ -19,6 +20,7 @@ class OrderController
 
 	public function updateOrderStatus(): string
 	{
+		
 		$orderId = (int) $_POST['order_id'];
 		$orderStatus = (string) $_POST['order_status'];
 
@@ -27,8 +29,6 @@ class OrderController
 
 		if($isUpdated){
 			return "Order id $orderId status updated to $orderStatus";
-		}else{
-			return "Order id $orderId status not updated";
 		}
 	}
 

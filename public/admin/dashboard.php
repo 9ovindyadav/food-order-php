@@ -1,3 +1,10 @@
+<?php
+$dashboard = $data[0][0];
+$orders = $data[1];
+echo '<pre>';
+// var_dump($data);
+echo '</pre>';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,85 +19,134 @@
 
 		<div class="box box1">
 			<div class="text">
-				<h2 class="topic-heading">60.5k</h2>
+				<h2 class="topic-heading"><?= $dashboard['total_orders'] ?></h2>
 				<h2 class="topic">Total orders</h2>
 			</div>
 
 			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png"
+"../images/admin/dishes.svg"
 				alt="Views">
 		</div>
 
 		<div class="box box2">
 			<div class="text">
-				<h2 class="topic-heading">150</h2>
+				<h2 class="topic-heading"><?= $dashboard['total_users'] ?></h2>
 				<h2 class="topic">Total users</h2>
 			</div>
 
 			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
+"../images/admin/user.svg"
 				alt="likes">
 		</div>
 
 		<div class="box box3">
 			<div class="text">
-				<h2 class="topic-heading">320</h2>
+				<h2 class="topic-heading"><?= $dashboard['total_menu_items'] ?></h2>
 				<h2 class="topic">Total menu</h2>
 			</div>
 
 			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
-				alt="comments">
-		</div>
-
-		<div class="box box3">
-			<div class="text">
-				<h2 class="topic-heading">320</h2>
-				<h2 class="topic">Total menu</h2>
-			</div>
-
-			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
-				alt="comments">
-		</div>
-
-		<div class="box box3">
-			<div class="text">
-				<h2 class="topic-heading">320</h2>
-				<h2 class="topic">Total menu</h2>
-			</div>
-
-			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
+"../images/admin/menus.svg"
 				alt="comments">
 		</div>
 
 		<div class="box box4">
 			<div class="text">
-				<h2 class="topic-heading">70</h2>
-				<h2 class="topic">Revenue</h2>
+				<h2 class="topic-heading"><?= $dashboard['total_revenue'] ?></h2>
+				<h2 class="topic">Total Revenue</h2>
 			</div>
 
 			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
+"../images/admin/dollar.svg"
+				alt="comments">
+		</div>
+
+		<div class="box box5">
+			<div class="text">
+				<h2 class="topic-heading"><?= $dashboard['cancelled_orders'] ?></h2>
+				<h2 class="topic">Cancelled Orders</h2>
+			</div>
+
+			<img src=
+"../images/admin/cancelled.svg"
+				alt="comments">
+		</div>
+
+		<div class="box box6">
+			<div class="text">
+				<h2 class="topic-heading"><?= $dashboard['pending_orders'] ?></h2>
+				<h2 class="topic">Pending Orders</h2>
+			</div>
+
+			<img src="../images/admin/clock.svg" alt="published">
 		</div>
 	</div>
 
-	<div class="report-container">
+	<div class="report-container mt-5">
 		<div class="report-header">
 			<h1 class="recent-Articles">Recent Orders</h1>
-			<button class="view">View All</button>
 		</div>
 
-		<div class="report-body">
-		<div class="report-topic-heading">
-				<h3 class="t-op">Order id</h3>
-				<h3 class="t-op">Order items</h3>
-				<h3 class="t-op">Amount</h3>
-				<h3 class="t-op">Payment</h3>
-				<h3 class="t-op">Created at</h3>
-			</div>
-		</div>
+		<div class="table-responsive text-nowrap">
+            <table class="table table-striped align-middle mb-0 bg-white">
+                <thead class="bg-light text-center">
+                    <tr>
+                    <th>Order Id</th>
+                    <th>Order Menu</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Created By</th>
+                    <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach($orders as $order): ?>
+                    <tr>
+                    <td class="text-center"><?= $order['order_id'] ?></td>
+                    <td>
+                        <?php
+                                $items = $order['items'];
+                                $menuNames = array_map(function ($item) {
+                                    return $item['name'].' - '.$item['quantity'].' pcs' ;
+                                },$items);
+                                ?>
+                                <ol>
+                                <?php foreach($menuNames as $menu): ?>
+                                    <li><?= $menu ?></li>
+                                <?php endforeach ?>
+                                </ol>                 
+                    </td>
+                    <td class="text-center">
+                    <?= $order['amount'] ?>
+                    </td>
+                    <td class="text-center">
+    <?php
+        $orderStatus = $order['order_status'];
+
+        // Define CSS classes for each status
+        $statusClasses = [
+            'cancelled' => 'badge-danger',
+            'taken' => 'badge-warning',
+            'prepairing' => 'badge-primary',
+            'packed' => 'badge-success',
+        ];
+
+        // Check if the status exists in the array, default to 'badge-secondary' if not found
+        $statusClass = isset($statusClasses[$orderStatus]) ? $statusClasses[$orderStatus] : 'badge-secondary';
+    ?>
+    <span class="badge rounded-pill d-inline <?= $statusClass ?>"><?= $orderStatus ?></span>
+</td>
+
+                    <td class="text-center"><?= $order['created_by'] ?></td>
+                    <td class="text-center">
+                    <?= $order['created_at'] ?>
+                    </td>
+                    </tr>
+                    <?php endforeach ?>
+                </tbody>
+                </table>
+                </div>
+            </div>
 	</div>
 </div>
 </div>

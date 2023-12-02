@@ -50,9 +50,9 @@ class LoginController
 
 	public function logout(): string
 	{	
-		session_destroy();
+		
 		$_SESSION = array();
-
+		session_destroy();
 		header('location: /login');
 
 		return 'Logged out';

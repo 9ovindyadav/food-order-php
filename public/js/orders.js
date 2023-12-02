@@ -35,10 +35,11 @@
         const tableBody = $('#orderTableBody');
 
         tableBody.empty();
-
+        let srno = 1 ;
         menuObj.forEach(function (item) {
-            var row = '<tr><td>' + item.name + '</td><td>' + item.price + '</td></tr>';
+            var row = '<tr><td>' + srno + '</td><td>' + item.name + '</td><td>' + item.price + '</td></tr>';
             tableBody.append(row);
+            srno++ ;
 
             totalAmount += item.price;
         });
@@ -116,6 +117,68 @@
             alert(err);
           })
       });
+
+
+      $('.order_status').on('change', function () {
+        const selectedStatus = $(this).val();
+        const orderId = $(this).closest('.order_status_form').data('order-id');
+    
+        // console.log(selectedStatus, orderId);
+    
+        $.ajax({
+            type: 'POST',
+            url: '/order/update/status',
+            data: {
+                order_id: orderId,
+                order_status: selectedStatus
+            },
+            success: function (response) {
+                console.log(response)
+                if (alert(response)) {
+                    
+                    location.reload(); 
+                }
+            },
+            error: function (error) {
+                
+                if (alert(error)) {
+                    
+                    location.reload(); 
+                }
+            }
+        });
+    });
+
+
+    $('.payment_status').on('change', function () {
+        const selectedStatus = $(this).val();
+        const orderId = $(this).closest('.payment_status_form').data('order-id');
+    
+        // console.log(selectedStatus, orderId);
+    
+        $.ajax({
+            type: 'POST',
+            url: '/payment/update/status',
+            data: {
+                order_id: orderId,
+                payment_status: selectedStatus
+            },
+            success: function (response) {
+                console.log(response)
+                if (alert(response)) {
+                    
+                    location.reload(); 
+                }
+            },
+            error: function (error) {
+                
+                if (alert(error)) {
+                    
+                    location.reload(); 
+                }
+            }
+        });
+    });
     
 
    

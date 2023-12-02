@@ -5,6 +5,7 @@ $brandName = 'SK Chinese';
 $roles = ['admin', 'counter_staff','kitchen_staff'];
 $countries = ['india','nepal','bhutan','bangladesh','shree lanka'];
 
-$paymentStatus = ['paid','unpaid'];
-$orderStatus = ['taken','prepairing','packed','cancelled'];
+$paymentStatuses = ['paid','unpaid'];
+$orderStatuses = ['taken','prepairing','packed','cancelled'];
+
 
