@@ -8,4 +8,6 @@ $countries = ['india','nepal','bhutan','bangladesh','shree lanka'];
 $paymentStatuses = ['paid','unpaid'];
 $orderStatuses = ['taken','prepairing','packed','cancelled'];
 
+$menuStatus = ['available, unavailable '];
+
 

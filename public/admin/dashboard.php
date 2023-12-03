@@ -2,7 +2,7 @@
 $dashboard = $data['dashboard'][0];
 
 $unOrganizedorders = $data['orders'] ;
-var_dump($_SESSION);
+
 $orders = [];
 
 foreach ($unOrganizedorders as $order) {

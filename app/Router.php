@@ -139,7 +139,11 @@ class Router
 				'/admin/users', 
 				'/admin/orders',
 				'/admin/menus',
-				'/admin/profile'
+				'/admin/profile',
+				'/menu/create',
+				'/menu/update/status',
+				'/menu/update',
+				'/menu/delete'
 				];
 	}
 
@@ -161,7 +165,8 @@ class Router
 				'/kitchen/all_orders',
 				'/kitchen/profile',
 				'/kitchen/menus',
-				'/order/update/status'
+				'/order/update/status',
+				'/menu/update/status'
 				];
 	}
 

@@ -19,7 +19,7 @@ require_once(__DIR__.'/../../meta_data.php');
 		<div class="report-header">
 			<h1 class="recent-Articles">Menus</h1>
 			
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-new-user">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-new-menu">
 							Add Menu
 			 </button>
 
@@ -36,6 +36,7 @@ require_once(__DIR__.'/../../meta_data.php');
 					<th scope="col">Price</th>
 					<th scope="col">Image</th>
 					<th scope="col">Status</th>
+                    <th scope="col">Created At</th>
 					<th scope="col">Update</th>
 					<th scope="col">Delete</th>
 					</tr>
@@ -133,9 +134,9 @@ require_once(__DIR__.'/../../meta_data.php');
 								   </div>
 							</td>
 							<td>
-							<form method="post" class="admin_delete_user" style="display: inline;">
-												  <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-												  <button type="submit" name="delete_user" class="btn btn-danger">Delete</button>
+							<form method="post" class="admin_delete_menu" style="display: inline;">
+												  <input type="hidden" name="menu_id" value="<?= $menu['id'] ?>">
+												  <button type="submit" name="delete_menu" class="btn btn-danger">Delete</button>
 											  </form>
 							</td>
 							
@@ -149,53 +150,51 @@ require_once(__DIR__.'/../../meta_data.php');
 </div>
 
  <!-- Add new user modal -->
- <div class="modal fade" id="add-new-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal fade" id="add-new-menu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Add new user</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Add Menu</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
-						<form method="POST" id="admin_add_user">
+						<form method="POST" id="admin_add_menu">
 							<div class="row">
 								<div class="col-12 form-group">
-									<label for="full-name">Full name</label>
+									<label for="full-name">Name</label>
 									<input 
 										type="text" 
 										class="form-control" 
-										id="full-name"
-										name="full_name" 
-										placeholder="Enter your full name">
+										id="menu_name"
+										name="menu_name" 
+										placeholder="Enter menu name">
 								</div>
 								<div class="col-12 form-group">
-									<label for="email">Email address</label>
+									<label for="email">Price</label>
 									<input 
-										type="email" 
+										type="text" 
 										class="form-control" 
-										name="email" 
-										id="email" 
-										placeholder="name@example.com">
+										name="price" 
+										id="price" 
+										placeholder="Price">
 								</div>
-								<div class="col-12 form-group">
-								<label for="role">Role</label>
-									   <select 
-										   class="form-control" 
-											  name="role"
-										 id="role">
-										<option value="">Choose role</option>		  	                         
-										<?php foreach($roles as $role): ?>
-											<option value="<?= $role ?>"><?= $role ?></option>
-										<?php endforeach ?>    
-										</select>
+                                <div class="col-12 form-group">
+									<label for="email">Image link</label>
+									<input 
+										type="text" 
+										class="form-control" 
+										name="img" 
+										id="img" 
+										placeholder="Image link">
 								</div>
+								
 							</div>
 							
 							<div class="row my-3">
 								<div class="col">
-									<button type="submit" name="add_user" class="btn btn-primary w-100">Add user</button>
+									<button type="submit" name="add_menu" class="btn btn-primary w-100">Add Menu</button>
 								</div>
 							</div>
 						</form>
