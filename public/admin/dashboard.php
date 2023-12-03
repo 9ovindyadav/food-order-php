@@ -1,9 +1,33 @@
 <?php
-$dashboard = $data[0][0];
-$orders = $data[1];
-echo '<pre>';
-// var_dump($data);
-echo '</pre>';
+$dashboard = $data['dashboard'][0];
+
+$unOrganizedorders = $data['orders'] ;
+var_dump($_SESSION);
+$orders = [];
+
+foreach ($unOrganizedorders as $order) {
+    $orderId = $order['order_id'];
+
+    if (!isset($orders[$orderId])) {
+        $orders[$orderId] = [
+            'order_id' => $orderId,
+            'created_by' => $order['created_by'],
+            'created_at' => $order['created_at'],
+            'amount' => $order['amount'],
+            'payment_status' => $order['payment_status'],
+            'order_status' => $order['order_status'],
+            'items' => [],
+        ];
+    }
+
+    $orders[$orderId]['items'][] = [
+        'menu_id' => $order['menu_id'],
+        'name' => $order['menu_name'],
+        'price' => $order['menu_price'],
+        'quantity' => $order['menu_qty']
+    ];
+}
+$orders = array_reverse($orders);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,11 +134,11 @@ echo '</pre>';
                                     return $item['name'].' - '.$item['quantity'].' pcs' ;
                                 },$items);
                                 ?>
-                                <ol>
+                            
                                 <?php foreach($menuNames as $menu): ?>
-                                    <li><?= $menu ?></li>
+                                    <p><?= $menu ?></p>
                                 <?php endforeach ?>
-                                </ol>                 
+                                            
                     </td>
                     <td class="text-center">
                     <?= $order['amount'] ?>

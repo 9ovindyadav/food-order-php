@@ -115,7 +115,7 @@ class OrderModel extends Model
                          ON         order_items.menu_id = menus.id
                          LEFT JOIN  payments
                          ON         orders.id = payments.order_id 
-                         WHERE payments.status = "unpaid"
+                         WHERE payments.status = "unpaid" AND NOT orders.status = "cancelled"
                                     ');
                         
         $statement->execute();

@@ -19,7 +19,8 @@ CREATE TABLE menus (
             name VARCHAR(30),
             price INT(4),
             created_at DATETIME,
-            img VARCHAR(200)
+            img VARCHAR(200),
+            is_active boolean
 );
 
 
@@ -49,10 +50,10 @@ CREATE TABLE payments (
 );
 
 
-INSERT INTO `menus` (`id`, `name`, `price`, `created_at`, `img`) VALUES
-(1, 'Vada pav', 15, '2023-11-29 06:43:04', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701267618/food_order_system/vada-pav_grzq55.jpg'),
-(2, 'Fried chicken', 100, '2023-11-29 13:58:04', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701267506/food_order_system/fried-chicken_eyblmr.jpg'),
-(3, 'Chilli potato', 50, '2023-11-29 13:58:04', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701267504/food_order_system/chilli-potato_grfkbr.jpg'),
-(4, 'Pasta', 150, '2023-11-29 13:58:04', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701267505/food_order_system/pasta_acuzhk.jpg'),
-(5, 'Veg Manchurian', 80, '2023-11-29 14:58:03', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701269789/food_order_system/veg-manchurian_yuidin.jpg'),
-(6, 'Egg Omlette', 50, '2023-11-29 14:58:04', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701269789/food_order_system/egg-omlete_gih0ma.jpg');
+INSERT INTO `menus` (`id`, `name`, `price`, `created_at`, `img`,`is_active`) VALUES
+(1, 'Vada pav', 15, '2023-11-29 06:43:04', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701267618/food_order_system/vada-pav_grzq55.jpg',true),
+(2, 'Fried chicken', 100, '2023-11-29 13:58:04', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701267506/food_order_system/fried-chicken_eyblmr.jpg',true),
+(3, 'Chilli potato', 50, '2023-11-29 13:58:04', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701267504/food_order_system/chilli-potato_grfkbr.jpg',true),
+(4, 'Pasta', 150, '2023-11-29 13:58:04', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701267505/food_order_system/pasta_acuzhk.jpg',true),
+(5, 'Veg Manchurian', 80, '2023-11-29 14:58:03', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701269789/food_order_system/veg-manchurian_yuidin.jpg',true),
+(6, 'Egg Omlette', 50, '2023-11-29 14:58:04', 'https://res.cloudinary.com/dnkelaevp/image/upload/v1701269789/food_order_system/egg-omlete_gih0ma.jpg',true);

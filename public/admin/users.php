@@ -27,43 +27,36 @@ require_once(__DIR__.'/../../meta_data.php');
 				
 		</div>
 
-		<div class="report-body">
-			<div class="report-topic-heading">
-				<h3 class="t-op">User Id</h3>
-				<h3 class="t-op">Name</h3>
-				<h3 class="t-op">Email</h3>
-				<h3 class="t-op">Role</h3>
-				<h3 class="t-op">Last Updated</h3>
-				<h3 class="t-op"></h3>
-			</div>
-
-			<div class="items">
-									
-	
-			   
-				<?php foreach ($users as $user): ?>
-						   <div class="item1">
-							<h3 class="t-op-nextlvl"><?= $user['id'] ?></h3>
-							<h3 class="t-op-nextlvl"><?= $user['name'] ?></h3>
-							<h3 class="t-op-nextlvl"><?= $user['email'] ?></h3>
-							<h3 class="t-op-nextlvl"><?= $user['role'] ?></h3>
-							<h3 class="t-op-nextlvl"><?= $user['updated_at'] ?></h3>
-					   
-							<h3 class="t-op-nextlvl">
-								   <!-- Button to trigger the modal -->
-								   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update-user-modal-<?= $user['id'] ?>">
+		<div class="table-responsive text-nowrap">
+			<table class="table table-striped align-middle">
+				<thead>
+					<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Role</th>
+					<th scope="col">Last updated</th>
+					<th scope="col">Update</th>
+					<th scope="col">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($users as $user): ?>
+						<tr>
+							<th scope="row"><?= $user['id'] ?></th>
+							<td><?= $user['name'] ?></td>
+							<td><?= $user['email'] ?></td>
+							<td><?= $user['role'] ?></td>
+							<td><?= $user['updated_at'] ?></td>
+							<td>
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update-user-modal-<?= $user['id'] ?>">
 									   Update
 								   </button>
 
-								   <form method="post" class="admin_delete_user" style="display: inline;">
-												  <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-												  <button type="submit" name="delete_user" class="btn btn-danger">Delete</button>
-											  </form>
-
 								   <!-- Modal -->
-								   <div class="modal fade"
+								   <div class="modal fade update-user-modal"
 								id="update-user-modal-<?= $user['id'] ?>"	
-								class="update-user-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								 tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									   <div class="modal-dialog">
 										   <div class="modal-content">
 											   <div class="modal-header">
@@ -107,11 +100,19 @@ require_once(__DIR__.'/../../meta_data.php');
 										   </div>
 									   </div>
 								   </div>
-							</h3>
-						</div>
-					   <?php endforeach; ?>
-
-			</div>
+							</td>
+							<td>
+							<form method="post" class="admin_delete_user" style="display: inline;">
+												  <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+												  <button type="submit" name="delete_user" class="btn btn-danger">Delete</button>
+											  </form>
+							</td>
+							
+						</tr>
+					<?php endforeach; ?>	
+				</tbody>
+			</table>
+		</div>
 		</div>
 	</div>
 </div>

@@ -7,6 +7,7 @@ namespace App\Controllers ;
 use App\View ;
 use App\Models\UserModel ;
 use App\Models\OrderModel ;
+use App\Models\MenuModel ;
 
 class AdminController
 {
@@ -14,9 +15,9 @@ class AdminController
     {
         $orderModel = new OrderModel();
 
-        $orders = $orderModel->getAll();
+        $orders = $orderModel->kitchenPendingOrders();
         $dashboardData = $orderModel->adminDashboardData();
-        $data = [$dashboardData, $orders];
+        $data = ['dashboard' => $dashboardData,'orders'=> $orders];
         return View::make('admin/dashboard', $data);
     }
 
@@ -39,8 +40,10 @@ class AdminController
 
     public function viewMenus(): View
     {   
+        $menuModel = new MenuModel();
+        $menus = $menuModel->getAll();
 
-        return View::make('admin/menus');
+        return View::make('admin/menus', $menus);
     }
 
     public function viewProfile(): View

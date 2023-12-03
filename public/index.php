@@ -80,4 +80,3 @@ $router = new Router() ;
 ))
 ->run();
 
-// var_dump($_SESSION);

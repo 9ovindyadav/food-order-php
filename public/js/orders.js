@@ -105,16 +105,12 @@
           data: data,
         })
           .done((data) => {
-            $(this).trigger('reset');
-            console.log(data);
-            if (alert(data)) {
-                
-                location.reload(); 
-            }
+            alert(data);
+            window.location.href = '/counter/home'
             })
           .fail((err) => {
-            
             alert(err);
+            location.reload();
           })
       });
 
@@ -133,18 +129,12 @@
                 order_status: selectedStatus
             },
             success: function (response) {
-                console.log(response)
-                if (alert(response)) {
-                    
-                    location.reload(); 
-                }
+                alert(response)
+                location.reload();
             },
             error: function (error) {
-                
-                if (alert(error)) {
-                    
-                    location.reload(); 
-                }
+                alert(error)
+                location.reload();
             }
         });
     });
@@ -164,18 +154,12 @@
                 payment_status: selectedStatus
             },
             success: function (response) {
-                console.log(response)
-                if (alert(response)) {
-                    
-                    location.reload(); 
-                }
+                alert(response)
+                location.reload();
             },
             error: function (error) {
-                
-                if (alert(error)) {
-                    
-                    location.reload(); 
-                }
+                alert(error)
+                location.reload();
             }
         });
     });

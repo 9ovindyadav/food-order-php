@@ -69,32 +69,32 @@ $orders = array_reverse($orders);
                                     return $item['name'].' - '.$item['quantity'].' pcs' ;
                                 },$items);
                                 ?>
-                                <ol>
+                                
                                 <?php foreach($menuNames as $menu): ?>
-                                    <li><?= $menu ?></li>
+                                    <p><?= $menu ?></p>
                                 <?php endforeach ?>
-                                </ol>                 
+                                                
                     </td>
                     <td class="text-center">
                     <?= $order['amount'] ?>
                     </td>
                     <td class="text-center">
-    <?php
-        $orderStatus = $order['order_status'];
+                        <?php
+                            $orderStatus = $order['order_status'];
 
-        // Define CSS classes for each status
-        $statusClasses = [
-            'cancelled' => 'badge-danger',
-            'taken' => 'badge-warning',
-            'prepairing' => 'badge-primary',
-            'packed' => 'badge-success',
-        ];
+                            // Define CSS classes for each status
+                            $statusClasses = [
+                                'cancelled' => 'badge-danger',
+                                'taken' => 'badge-warning',
+                                'prepairing' => 'badge-primary',
+                                'packed' => 'badge-success',
+                            ];
 
-        // Check if the status exists in the array, default to 'badge-secondary' if not found
-        $statusClass = isset($statusClasses[$orderStatus]) ? $statusClasses[$orderStatus] : 'badge-secondary';
-    ?>
-    <span class="badge rounded-pill d-inline <?= $statusClass ?>"><?= $orderStatus ?></span>
-</td>
+                            // Check if the status exists in the array, default to 'badge-secondary' if not found
+                            $statusClass = isset($statusClasses[$orderStatus]) ? $statusClasses[$orderStatus] : 'badge-secondary';
+                        ?>
+                        <span class="badge rounded-pill d-inline <?= $statusClass ?>"><?= $orderStatus ?></span>
+                    </td>
 
                     <td class="text-center"><?= $order['created_by'] ?></td>
                     <td class="text-center">
