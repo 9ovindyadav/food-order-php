@@ -59,7 +59,8 @@ require_once(__DIR__.'/../../meta_data.php');
                                 
                                 </div>
                             </td>
-                            <td class="text-center">
+
+                            <td>
                                 <?php
                                     $menuStatus = $menu['is_active'];
 
@@ -77,53 +78,71 @@ require_once(__DIR__.'/../../meta_data.php');
                                     $statusLabel = isset($statusLabels[$menuStatus]) ? $statusLabels[$menuStatus] : 'Unknown';
                                     
                                 ?>
-                                <span class="badge rounded-pill d-inline <?= $statusClass ?>"><?= $statusLabel ?></span>
+
+                                    <form method="post" class="menu_status_form" data-menu-id="<?= $menu['id'] ?>" >
+                                    <div class="form-group">
+                                    <select class="menu_status badge rounded-pill d-inline <?= $statusClass ?>" name="menu_status" id="menu_status_<?= $order['menu_id'] ?>">
+                                                <?php foreach ([1,0] as $status): ?>
+                                                    <option value="<?= $status ?>" <?= ($status == $menu['is_active']) ? 'selected' : '' ?>>
+                                                        <?= $statusLabels[$status] ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </form>
                             </td>
+                
                             <td><?= $menu['created_at'] ?></td>
 							<td>
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update-user-modal-<?= $user['id'] ?>">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update-menu-modal-<?= $menu['id'] ?>">
 									   Update
 								   </button>
 
 								   <!-- Modal -->
 								   <div class="modal fade update-user-modal"
-								id="update-user-modal-<?= $user['id'] ?>"	
+								id="update-menu-modal-<?= $menu['id'] ?>"	
 								 tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									   <div class="modal-dialog">
 										   <div class="modal-content">
 											   <div class="modal-header">
-												   <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
+												   <h5 class="modal-title" id="exampleModalLabel">Update Menu</h5>
 												   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													   <span aria-hidden="true">&times;</span>
 												   </button>
 											   </div>
 											   <div class="modal-body">
 												   <!-- Update form with pre-filled values -->
-												   <form method="post" class="admin_update_user">
-													   <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+												   <form method="post" class="admin_update_menu">
+													   <input type="hidden" name="menu_id" value="<?= $menu['id'] ?>">
 													   <div class="form-group">
-														   <label for="full_name">Full Name</label>
-														   <input type="text" class="form-control" id="full_name" name="full_name" value="<?= $user['name'] ?>" required>
+														   <label for="menu_name">Menu Name</label>
+														   <input type="text" class="form-control" id="menu_name" name="menu_name" value="<?= $menu['name'] ?>" required>
 													   </div>
-													   <div class="form-group">
-														   <label for="email">Email</label>
-														   <input type="email" class="form-control" id="email" name="email" value="<?= $user['email'] ?>" required>
+													   <div class="row">
+                                                       <div class="col-6 form-group">
+														   <label for="menu_price">Price</label>
+														   <input type="text" class="form-control" id="menu_price" name="menu_price" value="<?= $menu['price'] ?>" required>
 													   </div>
-													   <div class="form-group">
-														   <label for="role">Role</label>
+                                                       <div class="col-6 form-group">
+														   <label for="menu_status">Status</label>
 														   <select 
 															   class="form-control" 
-															   name="role"
-															   id="role">
+															   name="menu_status"
+															   id="menu_status">
 															  <?php 
-															  $roleOptions = array_map(function($role) use ($user) {
-																	 $selected = ($role == $user['role']) ? 'selected' : '';
+															  $roleOptions = array_map(function($role) use ($menu) {
+																	 $selected = ($role == $menu['is_active']) ? 'selected' : '';
 																	 return "<option value=\"$role\" $selected>$role</option>";
-																 }, $roles);
+																 }, [0,1]);
 
 															  echo(implode("", $roleOptions));
 															  ?>
 															</select>
+													   </div>
+                                                       </div>
+													   <div class="form-group">
+														   <label for="menu_img">Image link</label>
+														   <input type="text" class="form-control" id="menu_img" name="menu_img" value="<?= $menu['img'] ?>" required>
 													   </div>
 
 													   <button type="submit" name="update_user" class="btn btn-primary w-100">Update</button>

@@ -118,7 +118,7 @@ class Router
 
 	private function getAllowedRoutes(string $userRole): array
 	{	
-		$commonRoutes = ['/','/logout'];
+		$commonRoutes = ['/','/logout','/user/update/password'];
 
 		switch ($userRole) {
 			case 'admin':
@@ -143,7 +143,7 @@ class Router
 				'/menu/create',
 				'/menu/update/status',
 				'/menu/update',
-				'/menu/delete'
+				'/menu/delete',
 				];
 	}
 

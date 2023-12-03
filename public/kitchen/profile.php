@@ -82,7 +82,11 @@ $userData = $data ;
                 <p class="mb-0">Password</p>
               </div>
               <div class="col-sm-9">
-              <button type="button" class="btn btn-outline-primary ms-1">Update password</button>
+              <button type="button" 
+                      class="btn btn-outline-primary ms-1"
+                      data-target="#user-password-update"
+                      data-toggle="modal"
+                      >Update password</button>
               </div>
             </div>
             
@@ -95,5 +99,55 @@ $userData = $data ;
 </section>
     </div>
 </div>
+
+
+<!-- Add new user modal -->
+<div class="modal fade" id="user-password-update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Update password</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form method="POST" id="user_update_password">
+              <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
+							<div class="row">
+								<div class="col-12 form-group">
+									<label for="full-name">New password</label>
+									<input 
+										type="password" 
+										class="form-control" 
+										id="new_password"
+										name="new_password" 
+										placeholder="New password">
+								</div>
+								<div class="col-12 form-group">
+									<label for="email">Reenter password</label>
+									<input 
+										type="password" 
+										class="form-control" 
+										name="re_password" 
+										id="re_password" 
+										placeholder="Reenter password">
+								</div>
+								
+							</div>
+							
+							<div class="row my-3">
+								<div class="col">
+									<button type="submit" name="add_user" class="btn btn-primary w-100">
+                    Update</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					</div>
+				</div>
+</div>
+
 </body>
 </html>

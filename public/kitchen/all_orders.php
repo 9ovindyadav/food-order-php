@@ -124,9 +124,9 @@ $orders = array_reverse($orders);
                             // Check if the status exists in the array, default to 'badge-secondary' if not found
                             $paymentStatusClass = isset($paymentStatusClasses[$paymentStatus]) ? $paymentStatusClasses[$paymentStatus] : 'badge-secondary';
                         ?>
-                    <form method="post" class="payment_status_form" data-order-id="<?= $order['order_id'] ?>" >
-                    <div class="form-group">
-                    <select class="form-control payment_status badge rounded-pill d-inline <?= $paymentStatusClass ?>" name="payment_status" id="payment_status_<?= $order['order_id'] ?>">
+                                    <form method="post" class="payment_status_form" data-order-id="<?= $order['order_id'] ?>" >
+                                    <div class="form-group">
+                                    <select class="form-control payment_status badge rounded-pill d-inline <?= $paymentStatusClass ?>" name="payment_status" id="payment_status_<?= $order['order_id'] ?>">
                                                 <?php foreach ($paymentStatuses as $status): ?>
                                                     <option value="<?= $status ?>" <?= ($status == $order['payment_status']) ? 'selected' : '' ?>>
                                                         <?= $status ?>

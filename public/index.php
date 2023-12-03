@@ -74,6 +74,8 @@ $router = new Router() ;
             ->post('/menu/update/status', [MenuController::class, 'updateMenuStatus'])
             ->post('/menu/delete', [MenuController::class, 'deleteMenu'])
 
+            ->post('/user/update/password', [LoginController::class, 'updatePassword'])
+
             ->post('/payment/update/status', [PaymentController::class, 'updatePaymentStatus'])
             ->get('/counter/order/view', [OrderController::class, 'getAllOrders'])
             ;

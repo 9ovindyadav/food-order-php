@@ -78,3 +78,30 @@ $('#admin_add_user').submit(function (e) {
       }
     });
   });
+
+
+
+  $('#user_update_password').submit(function (e) {
+
+    e.preventDefault();
+    const data = {
+      user_id: $(this).find('[name=user_id]').val(),
+      new_password: $(this).find('[name=new_password]').val() ,
+      re_password: $(this).find('[name=re_password]').val(),
+    };
+    console.log(data)
+    $.ajax({
+      type: 'POST',
+      url: '/user/update/password',
+      data: data,
+      success: function (response) {
+        alert(response)
+        location.reload();
+      },
+      error: function (error) {
+        alert(error)
+        location.reload();
+      }
+    });
+    
+  });

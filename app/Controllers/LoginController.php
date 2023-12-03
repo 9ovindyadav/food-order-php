@@ -9,8 +9,6 @@ use App\Models\UserModel ;
 
 class LoginController
 {	
-	private UserModel $userModel;
-
 	public function index(): View
 	{
 		return View::make('login');
@@ -46,6 +44,30 @@ class LoginController
 		}
 		
 
+	}
+
+	public function updatePassword(): string
+	{
+		$userId = (int) $_POST['user_id'];
+		$newPassword = $_POST['new_password'];
+		$rePassword = $_POST['re_password'];
+		
+		$userModel = new UserModel();
+
+		if($userId && $newPassword && $rePassword){
+			if($newPassword !== $rePassword){
+				return 'Password not matched';
+			}
+			$isUpdated = $userModel->updatePassword($userId, $newPassword);
+
+			if($isUpdated){
+				return "User $userId password updated";
+			}
+
+		}else{
+			return 'Please provide all credentials';
+		}
+		
 	}
 
 	public function logout(): string

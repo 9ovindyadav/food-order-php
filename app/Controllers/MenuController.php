@@ -42,7 +42,7 @@ class MenuController
 
     public function updateMenuStatus(): string
 	{	
-		$menuId = $_POST['menu_id'];
+		$menuId = (int) $_POST['menu_id'];
         $menuStatus = (int) $_POST['menu_status'];
         
         $menuModel = new MenuModel();
@@ -56,7 +56,7 @@ class MenuController
 
     public function deleteMenu(): string
     {
-        $menuId = $_POST['menu_id'];
+        $menuId = (int) $_POST['menu_id'];
         
         $menuModel = new MenuModel();
 

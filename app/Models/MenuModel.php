@@ -36,6 +36,18 @@ class MenuModel extends Model
         return 0 ;
     }
 
+    public function update(int $menuId,string $name, int $price ,string $img ,int $isActive = 0 ): bool
+    {
+        if($menuId && $name && $price && $img){
+            $statement = $this->db->prepare('UPDATE menus SET name = ? , price = ?, img = ? , is_active = ? WHERE id = ? ');
+
+            $statement->execute([$name, $price, $img, $isActive, $menuId]);
+
+            return true ;
+        }
+        return false ;
+    }
+
     public function updateStatus(int $menuId, int $menuStatus = 0 ): bool
     {
        $statement = $this->db->prepare('UPDATE menus SET is_active = ? WHERE id = ? ');
