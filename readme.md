@@ -33,6 +33,9 @@ The application is deployed and accessible at below URL
 - **Email** - admin@gmail.com
 - **Password** - admin 
 
+## Youtube video
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ckw7OoVXdu8/0.jpg)](https://www.youtube.com/watch?v=ckw7OoVXdu8)
+
 ## Setup 
 ### Prerequisites
 
