@@ -12,7 +12,11 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (name, email, role, password, is_active, updated_at, created_at)
-VALUES ('Govind yadav','govindsvyadav@gmail.com','admin', '$2y$12$uVETOmnLx4WzPBJKTKyE7evjpjTq.jZapQoa/pjLiew1.qg7eDZ6C', true,NOW(),NOW());
+VALUES 
+('Govind yadav','govindsvyadav@gmail.com','admin', '$2y$12$uVETOmnLx4WzPBJKTKyE7evjpjTq.jZapQoa/pjLiew1.qg7eDZ6C', true,NOW(),NOW())
+('Counter Staff','counter@gmail.com','counter_staff', '$2y$12$uVETOmnLx4WzPBJKTKyE7evjpjTq.jZapQoa/pjLiew1.qg7eDZ6C', true,NOW(),NOW())
+('Kitchen Staff','kitchen@gmail.com','kitchen_staff', '$2y$12$uVETOmnLx4WzPBJKTKyE7evjpjTq.jZapQoa/pjLiew1.qg7eDZ6C', true,NOW(),NOW())
+('Admin','admin@gmail.com','admin', '$2y$12$uVETOmnLx4WzPBJKTKyE7evjpjTq.jZapQoa/pjLiew1.qg7eDZ6C', true,NOW(),NOW());
 
 CREATE TABLE menus (
             id INT AUTO_INCREMENT PRIMARY KEY,
