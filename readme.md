@@ -17,7 +17,7 @@ The Food order system for Restaurant is a web-based application designed for sta
 
 The application is deployed and accessible at below URL
 
-[Restaurent Food order system](http://34.125.168.72)
+[Restaurent Food order system](https://fop.9ovind.in)
 
 ## Test Users
 
